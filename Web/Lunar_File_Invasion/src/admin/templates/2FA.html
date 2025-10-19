@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar CMS - Security Verification</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+            width: 90%;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.4);
+            border: 2px solid rgba(255, 85, 255, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .security-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .security-icon {
+            font-size: 4rem;
+            color: #ff55ff;
+            text-shadow: 0 0 30px rgba(255, 85, 255, 0.8);
+            animation: securityPulse 2s ease-in-out infinite;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        @keyframes securityPulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 30px rgba(255, 85, 255, 0.8);
+            }
+            50% { 
+                transform: scale(1.1);
+                text-shadow: 0 0 40px rgba(255, 85, 255, 1), 0 0 60px rgba(255, 85, 255, 0.5);
+            }
+        }
+
+        .security-title {
+            color: #ff55ff;
+            font-size: 2rem;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 85, 255, 0.6);
+        }
+
+        .security-subtitle {
+            color: #9f9fff;
+            font-size: 1rem;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.2), rgba(255, 50, 50, 0.3));
+            border: 2px solid rgba(255, 85, 85, 0.6);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 25px;
+            color: #ff8888;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            animation: errorShake 0.5s ease-in-out;
+        }
+
+        .error-message::before {
+            content: '⚠️';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 1.2rem;
+        }
+
+        .error-message {
+            padding-left: 50px;
+            text-align: left;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .pin-section {
+            margin: 30px 0;
+        }
+
+        .pin-label {
+            display: block;
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .pin-input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+            border: 2px solid rgba(255, 85, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            letter-spacing: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .pin-input:focus {
+            border-color: rgba(255, 85, 255, 0.8);
+            box-shadow: 0 0 30px rgba(255, 85, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .pin-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .validate-btn {
+            background: linear-gradient(45deg, #ff55ff, #9f55ff);
+            border: none;
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 85, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .validate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .validate-btn:hover::before {
+            left: 100%;
+        }
+
+        .validate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 85, 255, 0.6);
+        }
+
+        .validate-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .security-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 85, 255, 0.2);
+        }
+
+        .security-info h4 {
+            color: #ff55ff;
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        .security-info p {
+            color: #c0c0c0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Floating background elements */
+        .bg-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .bg-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .bg-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .bg-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+        .bg-element:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 6s; }
+        .bg-element:nth-child(5) { top: 50%; left: 5%; animation-delay: 1s; }
+        .bg-element:nth-child(6) { top: 60%; right: 5%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* Scanning line effect */
+        .scanner-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff55ff, transparent);
+            animation: scan 3s linear infinite;
+            z-index: 5;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-2px); }
+            100% { transform: translateY(400px); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                width: 95%;
+            }
+            
+            .security-title {
+                font-size: 1.6rem;
+            }
+            
+            .pin-input {
+                font-size: 1.4rem;
+                letter-spacing: 4px;
+                padding: 15px;
+            }
+            
+            .validate-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background elements -->
+    <div class="bg-element">🔐</div>
+    <div class="bg-element">🛡️</div>
+    <div class="bg-element">🔑</div>
+    <div class="bg-element">⭐</div>
+    <div class="bg-element">🌌</div>
+    <div class="bg-element">👽</div>
+
+    <div class="container">
+        <div class="scanner-line"></div>
+        
+        <div class="security-header">
+            <span class="security-icon">🔐</span>
+            <h1 class="security-title">Security Verification</h1>
+            <p class="security-subtitle">Lunar CMS Multi-Factor Authentication</p>
+        </div>
+
+        <div class="form-container">
+            <form action="{{ url_for('index.two_factor_authentication') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                
+                {% if err_msg %}
+                <div class="error-message">
+                    {{ err_msg }}
+                </div>
+                {% endif %}
+
+                <div class="pin-section">
+                    <label for="pin" class="pin-label">🔢 Enter 10-Digit Security Pin</label>
+                    <input 
+                        name="pin" 
+                        id="pin"
+                        type="text" 
+                        class="pin-input" 
+                        placeholder="0000000000"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        autocomplete="off"
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="validate-btn">
+                    🚀 Validate Access
+                </button>
+            </form>
+        </div>
+
+        <div class="security-info">
+            <h4>🛡️ Enhanced Security Protocol</h4>
+            <p>This additional verification step protects classified Lunar Society resources from unauthorized galactic entities. Your 10-digit pin was transmitted via secure quantum encryption.</p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-format pin input
+        const pinInput = document.getElementById('pin');
+        
+        pinInput.addEventListener('input', function(e) {
+            // Remove non-digits
+            let value = e.target.value.replace(/\D/g, '');
+            
+            // Limit to 10 digits
+            if (value.length > 10) {
+                value = value.slice(0, 10);
+            }
+            
+            e.target.value = value;
+        });
+
+        // Add some cosmic sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.fontSize = '1rem';
+            sparkle.style.opacity = '0.6';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '2';
+            sparkle.style.animation = `float ${2 + Math.random() * 3}s ease-in-out forwards`;
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 5000);
+        }
+
+        // Create sparkles periodically
+        setInterval(createSparkle, 1500);
+
+        // Focus on pin input when page loads
+        window.addEventListener('load', () => {
+            pinInput.focus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Check</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 600px;
+      width: 90%;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .container img {
+      max-width: 200px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #ff55ff;
+      margin-bottom: 20px;
+    }
+
+    .status {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #00ff99;
+    }
+
+    p {
+      font-size: 16px;
+      color: #ddd;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      .status {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="{{ url_for('index.static', filename='AlienHealth.png') }}" alt="Alien Space Illustration">
+    <h2>Lunar File System Health</h2>
+    <div class="status">Status: UP</div>
+    <p>This page securely shows the status of Lunar File System's internal servers.</p>
+  </div>
+
+</body>
+</html>
+

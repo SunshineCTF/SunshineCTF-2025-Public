@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🚀 Orbital Admin Access</title>
+  <style>
+    :root{
+      --accent: #7ee8fa;
+      --dark: #08121a;
+      --panel: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+    body{
+      background: radial-gradient(ellipse at 10% 10%, #071029 0%, #03040a 50%), linear-gradient(180deg,#00121a 0%, #000 100%);
+      color:#cfeff6;
+      overflow:hidden;
+    }
+    .starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+    .ui {
+      position:relative; z-index:2;
+      max-width:920px;margin:4vh auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+      display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:center;
+      backdrop-filter: blur(6px);
+    }
+    h1{margin:0 0 8px 0;font-size:28px;letter-spacing:0.6px}
+    p.lead{margin:0;color:#9fdff0}
+    .panel{padding:16px;border-radius:10px;background:var(--panel)}
+    .cta{
+      display:flex;flex-direction:column;gap:12px;
+      align-items:center;justify-content:center;padding:14px;border-radius:10px;background:var(--glass);
+    }
+    .btn {
+      display:inline-block;padding:10px 16px;border-radius:8px;background:linear-gradient(90deg,#2ec4ff,#7ee8fa);
+      color:#002029;text-decoration:none;font-weight:700;
+      box-shadow:0 6px 12px rgba(46,196,255,0.12);border:none;cursor:pointer;
+    }
+    .muted{opacity:0.8;font-size:13px}
+    .ban-robot{
+      display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:rgba(255,0,0,0.06);
+      color:#ffb3b3;border:1px solid rgba(255,0,0,0.05);
+    }
+    footer{grid-column:1/-1;text-align:center;margin-top:14px;color:#89d4e5;opacity:0.85}
+    /* small responsive */
+    @media (max-width:800px){
+      .ui{grid-template-columns:1fr; padding:18px;}
+      .cta{order:-1}
+    }
+  </style>
+</head>
+<body>
+  <canvas class="starfield" id="stars"></canvas>
+
+  <main class="ui">
+    <section class="panel">
+      <h1>Orbital Admin Docking</h1>
+      <p class="lead">We have amazing auth, no robots are allowed — only <strong>admins</strong> may dock. Solve the challenge and gain access to the admin portal.</p>
+
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <div class="ban-robot">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M4 10h16v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9z" stroke="#ff9b9b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 10V7a5 5 0 0 1 10 0v3" stroke="#ff9b9b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 14h.01M16 14h.01" stroke="#ff9b9b" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div style="font-weight:700">Robot Protocol</div>
+            <div class="muted">Automated agents are forbidden — human captains only.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="cta panel">
+      <div style="text-align:center">
+        <div style="font-size:42px">🛸</div>
+        <div style="font-weight:700;margin-top:6px">Command Console</div>
+        <div class="muted">Current mission: access admin</div>
+      </div>
+    </aside>
+
+    <footer>May your inspector be sharp and your console kinder than the void. ✦</footer>
+  </main>
+
+  <script>
+    // simple animated starfield canvas
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = innerWidth;
+    let h = canvas.height = innerHeight;
+    const stars = Array.from({length:250}, () => ({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      z: Math.random()*1,
+      r: Math.random()*1.2+0.2,
+      vx: (Math.random()-0.5)*0.02
+    }));
+    function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight;}
+    addEventListener('resize', resize);
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(const s of stars){
+        s.x += s.vx * (s.z*2+1);
+        if(s.x<0) s.x=w; if(s.x>w) s.x=0;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(190,240,255,${0.6*s.z+0.1})`;
+        ctx.arc(s.x,s.y,s.r*(1+s.z*2),0,Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>

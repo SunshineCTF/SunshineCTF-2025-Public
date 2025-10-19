@@ -1,0 +1,1 @@
+This challenge has the player translate numbers to text using a t9 keyboard.

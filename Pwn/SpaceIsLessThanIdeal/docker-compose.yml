@@ -1,0 +1,14 @@
+services:
+  space-less-than-ideal:
+    build: ./src
+    read_only: true
+    shm_size: 0m
+    ipc: none
+    ports:
+    - "25003:25003"
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 500M
+    restart: always

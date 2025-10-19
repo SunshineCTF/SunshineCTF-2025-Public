@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LunarShop – Products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0f18;
+      color: #d8f6ff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: #101828;
+      padding: 20px;
+      border-bottom: 2px solid #2a3c4f;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    p.tagline {
+      margin-top: 8px;
+      font-size: 1.1em;
+      color: #8ecae6;
+    }
+    main {
+      padding: 40px 20px;
+    }
+    .product-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    a.product-link {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 1.1em;
+      background: #1d3557;
+      color: #d8f6ff;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid #2a3c4f;
+      transition: background 0.3s, transform 0.2s;
+      width: 220px;
+      text-align: center;
+    }
+    a.product-link:hover {
+      background: #26406b;
+      transform: translateY(-3px);
+    }
+    footer {
+      margin-top: 50px;
+      padding: 15px;
+      font-size: 0.9em;
+      color: #7f9dbd;
+      border-top: 1px solid #2a3c4f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌌 LunarShop Catalog</h1>
+    <p class="tagline">Choose your product and begin your cosmic journey</p>
+  </header>
+
+  <main>
+    <div class="product-links">
+      <a href="{{ url_for('display_product') }}?product_id=1" class="product-link">🚀 Product One</a>
+      <a href="{{ url_for('display_product') }}?product_id=2" class="product-link">🌑 Product Two</a>
+      <a href="{{ url_for('display_product') }}?product_id=3" class="product-link">🛰️ Product Three</a>
+    </div>
+  </main>
+
+  <footer>
+    ✨ Browse. Discover. Hack the stars. ✨
+  </footer>
+</body>
+</html>

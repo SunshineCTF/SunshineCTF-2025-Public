@@ -1,0 +1,12 @@
+[toolchain]
+channel = "stable"
+components = ["rust-src", "llvm-tools-preview"]
+targets = ["x86_64-unknown-linux-musl"]
+profile = "default"
+
+# Nightly toolchain for building BPF programs
+[toolchain.nightly]
+channel = "nightly"
+components = ["rust-src"]
+targets = ["bpfel-unknown-none"]
+profile = "minimal"

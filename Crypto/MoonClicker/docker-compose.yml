@@ -1,0 +1,7 @@
+services:
+  relay:
+    build: ./src
+    container_name: moonclicker-challenge
+    ports:
+      - "25402:8000"
+    restart: always

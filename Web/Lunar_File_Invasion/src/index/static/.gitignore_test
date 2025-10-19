@@ -1,0 +1,10 @@
+# this tells the git CLI to ignore these files so they're not pushed to the repos by mistake.
+# this is because Muhammad noticed there were temporary files being stored on the disk when being edited
+# something about EMACs.
+
+# From MUHAMMAD: please make sure to name this .gitignore or it will not work !!!!
+
+# static files are stored in the /static directory.
+/index/static/login.html~
+/index/static/index.html~
+/index/static/error.html~

@@ -1,0 +1,2 @@
+FLAG = b"sun{n3v3r_c0unt_0ut_th3_p1ut0ni4ns}"
+MESSAGE = b"Greetings, Earthlings. It has come to our attention that you have chosen to downgrade our mighty planet to the status of 'dwarf'. Let it be known that although we are small, the Plutonian space navy will not stand idly by and accept such disrespect. Please contact us to discuss the terms of Earth's surrender before we arrive in approximately 10 years. Use this transmission code: %s" % FLAG

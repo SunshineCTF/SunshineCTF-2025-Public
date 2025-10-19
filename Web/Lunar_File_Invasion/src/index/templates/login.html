@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lunar Files</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      max-width: 900px;
+      width: 90%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .image-section {
+      flex: 1;
+      background: url("{{ url_for('index.static', filename='login.gif') }}") center/cover no-repeat;
+      min-height: 400px;
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .form-section h2 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #ff55ff;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .remember input {
+      margin-right: 10px;
+    }
+
+    .login-btn {
+      background: #ff55ff;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background: #e044e0;
+    }
+
+    .status-message {
+      margin-top: 10px;
+      color: #ff8080;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .image-section {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="image-section"></div>
+    <div class="form-section">
+      <h2>Lunar CMS Login</h2>
+      <form method="POST" action="{{ url_for('index.login') }}">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="admin@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="••••••••" />
+        </div>
+        <div class="remember">
+          <input type="checkbox" id="remember" />
+          <label for="remember">Remember Me</label>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button class="login-btn" type="submit">Login</button>
+        <div class="status-message">{{ err_msg }}</div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

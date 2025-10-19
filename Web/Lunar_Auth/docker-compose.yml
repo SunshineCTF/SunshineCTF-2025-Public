@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  chal:
+    build:
+      # setting the context to the current directory, this is a safety feature
+      # so only files within that path are allowed to be pulled or copied, and not anything outside of it
+      context: src
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:25305:8000"
+    environment:
+      - PYTHONUNBUFFERED=1

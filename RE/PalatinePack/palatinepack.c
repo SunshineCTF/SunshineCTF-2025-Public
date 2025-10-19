@@ -1,0 +1,325 @@
+#define _GNU_SOURCE
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <dlfcn.h>
+#include <inttypes.h>
+#include <sys/ptrace.h>
+#include <sys/mman.h>
+#include <unistd.h>
+#include <string.h>
+
+
+static const uint8_t SBOX[256] = {
+    0x63,0x7C,0x77,0x7B,0xF2,0x6B,0x6F,0xC5,0x30,0x01,0x67,0x2B,0xFE,0xD7,0xAB,0x76,
+    0xCA,0x82,0xC9,0x7D,0xFA,0x59,0x47,0xF0,0xAD,0xD4,0xA2,0xAF,0x9C,0xA4,0x72,0xC0,
+    0xB7,0xFD,0x93,0x26,0x36,0x3F,0xF7,0xCC,0x34,0xA5,0xE5,0xF1,0x71,0xD8,0x31,0x15,
+    0x04,0xC7,0x23,0xC3,0x18,0x96,0x05,0x9A,0x07,0x12,0x80,0xE2,0xEB,0x27,0xB2,0x75,
+    0x09,0x83,0x2C,0x1A,0x1B,0x6E,0x5A,0xA0,0x52,0x3B,0xD6,0xB3,0x29,0xE3,0x2F,0x84,
+    0x53,0xD1,0x00,0xED,0x20,0xFC,0xB1,0x5B,0x6A,0xCB,0xBE,0x39,0x4A,0x4C,0x58,0xCF,
+    0xD0,0xEF,0xAA,0xFB,0x43,0x4D,0x33,0x85,0x45,0xF9,0x02,0x7F,0x50,0x3C,0x9F,0xA8,
+    0x51,0xA3,0x40,0x8F,0x92,0x9D,0x38,0xF5,0xBC,0xB6,0xDA,0x21,0x10,0xFF,0xF3,0xD2,
+    0xCD,0x0C,0x13,0xEC,0x5F,0x97,0x44,0x17,0xC4,0xA7,0x7E,0x3D,0x64,0x5D,0x19,0x73,
+    0x60,0x81,0x4F,0xDC,0x22,0x2A,0x90,0x88,0x46,0xEE,0xB8,0x14,0xDE,0x5E,0x0B,0xDB,
+    0xE0,0x32,0x3A,0x0A,0x49,0x06,0x24,0x5C,0xC2,0xD3,0xAC,0x62,0x91,0x95,0xE4,0x79,
+    0xE7,0xC8,0x37,0x6D,0x8D,0xD5,0x4E,0xA9,0x6C,0x56,0xF4,0xEA,0x65,0x7A,0xAE,0x08,
+    0xBA,0x78,0x25,0x2E,0x1C,0xA6,0xB4,0xC6,0xE8,0xDD,0x74,0x1F,0x4B,0xBD,0x8B,0x8A,
+    0x70,0x3E,0xB5,0x66,0x48,0x03,0xF6,0x0E,0x61,0x35,0x57,0xB9,0x86,0xC1,0x1D,0x9E,
+    0xE1,0xF8,0x98,0x11,0x69,0xD9,0x8E,0x94,0x9B,0x1E,0x87,0xE9,0xCE,0x55,0x28,0xDF,
+    0x8C,0xA1,0x89,0x0D,0xBF,0xE6,0x42,0x68,0x41,0x99,0x2D,0x0F,0xB0,0x54,0xBB,0x16
+};
+/*
+static const uint8_t INV_SBOX[256] = {
+    0x52, 0x09, 0x5A, 0x8D, 0x30, 0x36, 0x94, 0x3A, 0x9F, 0x40, 0x9B, 0x6E, 0x5B, 0x8E, 0xCD, 0x8F,
+    0x4F, 0x47, 0x32, 0x5E, 0x62, 0x7B, 0x58, 0x33, 0x96, 0x3C, 0x22, 0x3D, 0x49, 0x4A, 0x08, 0x77,
+    0x31, 0x45, 0x25, 0xB3, 0x24, 0x3F, 0x8C, 0x42, 0x8B, 0xA2, 0x4E, 0x56, 0x93, 0x15, 0x2C, 0x36,
+    0x9A, 0x0B, 0x28, 0x8A, 0x4C, 0xA0, 0x48, 0x44, 0x41, 0x2D, 0x34, 0x14, 0x9E, 0x20, 0x64, 0x19,
+    0x13, 0x50, 0x8D, 0x11, 0x03, 0x02, 0xA3, 0x10, 0xA5, 0x4D, 0x91, 0x0F, 0xA4, 0xE1, 0xE3, 0xAB,
+    0x5F, 0xE9, 0x5D, 0x2B, 0x3B, 0x07, 0x86, 0xF5, 0x5C, 0x0A, 0x38, 0x29, 0xE5, 0x84, 0xA9, 0x6B,
+    0x5A, 0x16, 0x7E, 0x99, 0x2F, 0x59, 0xAD, 0x78, 0x61, 0x27, 0x9D, 0x18, 0x71, 0xC3, 0x6A, 0x43,
+    0x01, 0x17, 0x70, 0x12, 0x67, 0xE4, 0x85, 0x7A, 0x23, 0x21, 0x35, 0xB4, 0x00, 0xDC, 0x2A, 0x1A,
+    0xE0, 0x66, 0xB5, 0x97, 0x26, 0x98, 0x0E, 0xB0, 0xB8, 0x1F, 0x1C, 0xAA, 0xC0, 0xAF, 0x69, 0xF4,
+    0x9C, 0xF7, 0xD2, 0x63, 0x6D, 0x06, 0xEB, 0x75, 0x79, 0x6F, 0xD1, 0xD3, 0x90, 0x46, 0x6C, 0xF0,
+    0x76, 0x1B, 0x60, 0x39, 0xB2, 0xB6, 0xBF, 0x72, 0xE8, 0xCC, 0x92, 0x04, 0xE6, 0xD4, 0x6E, 0x0C,
+    0x55, 0x95, 0x2E, 0x74, 0xB7, 0xF3, 0x81, 0xC4, 0xD0, 0xE7, 0x80, 0x9F, 0xC2, 0xD9, 0x1D, 0x9A,
+    0x88, 0x7C, 0xB9, 0x73, 0xDE, 0xCE, 0xED, 0x7F, 0xC5, 0xA6, 0xF2, 0x83, 0xA8, 0x05, 0xA1, 0xA7,
+    0x6D, 0xC6, 0x3A, 0x68, 0xB1, 0x1E, 0x3E, 0x65, 0x87, 0xD5, 0x94, 0xD8, 0xC9, 0xDB, 0xBE, 0xEE,
+    0xBA, 0xF6, 0xD7, 0xC7, 0xC8, 0xD6, 0xF1, 0x89, 0x7D, 0xCF, 0xFD, 0x53, 0xE2, 0x57, 0xEA, 0xFA,
+    0x4B, 0xF8, 0xC1, 0xE2, 0xD6, 0xFB, 0xB3, 0xEE, 0xF9, 0xF6, 0x82, 0xC8, 0xF0, 0xE1, 0xD5, 0xFF
+};*/
+
+
+void rotate_block_left(uint8_t* block, int len, int bits) {
+    if (bits == 0 || len == 0) return;
+
+    uint64_t full = 0;
+    for (int i = 0; i < len; i++) {
+        full |= ((uint64_t)block[i]) << (i * 8);
+    }
+
+    int total_bits = len * 8;
+    full &= (1ULL << total_bits) - 1;
+
+    full = ((full << bits) | (full >> (total_bits - bits))) & ((1ULL << total_bits) - 1);
+
+    for (int i = 0; i < len; i++) {
+        block[i] = (full >> (i * 8)) & 0xFF;
+    }
+}
+
+void rotate_block_right(uint8_t* block, int len, int bits) {
+    if (bits == 0 || len == 0) return;
+
+    uint64_t full = 0;
+    for (int i = 0; i < len; i++) {
+        full |= ((uint64_t)block[i]) << (i * 8);
+    }
+
+    int total_bits = len * 8;
+    full &= (1ULL << total_bits) - 1;
+
+    full = ((full >> bits) | (full << (total_bits - bits))) & ((1ULL << total_bits) - 1);
+
+    for (int i = 0; i < len; i++) {
+        block[i] = (full >> (i * 8)) & 0xFF;
+    }
+}
+
+void flipBits(uint8_t *buffer, int length);
+uint8_t *expand(uint8_t *buffer, int length);
+uint8_t *deexpand(uint8_t *buffer, int length);
+void teehee();
+void teehee2();
+
+void anti_debug()
+{
+    if (ptrace(PTRACE_TRACEME, 0, 1, 0) == -1)
+    {
+        puts("THOU SHALL NOT READ MY MIND WITH GOTHIC MAGIC CAESER!!!\n");
+        exit(1);
+    }
+}
+
+void flipBits(uint8_t *buffer, int length)
+{
+
+    int flip = 0;
+    uint8_t xor_key = 0x69;
+
+    for (int i = 0; i < length; i++)
+    {
+
+        if (flip == 0)
+            buffer[i] = ~buffer[i];
+        else
+        {
+            buffer[i] = buffer[i] ^ xor_key;
+            xor_key = xor_key + 0x420;
+        }
+
+        flip = !flip;
+    }
+}
+
+void doWeirdStuff(uint8_t *buffer, int len) {
+    const int BLOCK_SIZE = 5;
+
+    for (int i = 0; i < len; i += BLOCK_SIZE) {
+        int remain = (len - i >= BLOCK_SIZE) ? BLOCK_SIZE : (len - i);
+        uint8_t *block = buffer + i;
+
+        for (int j = 0; j < remain; j++) {
+            block[j] = SBOX[block[j] ^ j];
+        }
+
+        int rot = remain * 3;
+        rotate_block_left(block, remain, rot);
+    }
+}
+/*
+void deweird(uint8_t *buffer, int len) {
+    const int BLOCK_SIZE = 5;
+
+    for (int i = 0; i < len; i += BLOCK_SIZE) {
+        int remain = (len - i >= BLOCK_SIZE) ? BLOCK_SIZE : (len - i);
+        uint8_t *block = buffer + i;
+
+        int rot = remain * 3;
+        rotate_block_right(block, remain, rot);
+
+        for (int j = remain - 1; j >= 0; j--) {
+            uint8_t val = block[j] - (j % 251);
+            block[j] = INV_SBOX[val];
+        }
+    }
+}*/
+
+
+
+uint8_t *expand(uint8_t *buffer, int length)
+{
+
+    int shift = 0;
+    uint8_t shift_key = 0x69;
+    uint8_t *expanded_array = malloc(length * 2 * sizeof(char));
+
+    for (int i = 0; i < length; i += 1)
+    {
+
+        int state = 1;
+        while (state)
+        { 
+            switch (state)
+            {
+            case 1: // REAL ONE, IGNORE ALL OTHER CASES!!!
+
+                if (shift == 0)
+                {
+                    expanded_array[2 * i] = (buffer[i] & 0x0f) | (shift_key << 4);
+                    expanded_array[2 * i + 1] = (buffer[i] & 0xf0) | (shift_key >> 4);
+                }
+                else
+                {
+                    expanded_array[2 * i] = (buffer[i] & 0xf0) | (shift_key >> 4);
+                    expanded_array[2 * i + 1] = (buffer[i] & 0x0f) | (shift_key << 4);
+                }
+                shift_key = shift_key * 11;
+
+                shift = !shift;
+                break;
+            case 2:
+                if (shift == 0)
+                {
+                    expanded_array[2 * i] = (buffer[i] & 0xff) | (shift_key << 1);
+                    expanded_array[2 * i + 1] = (buffer[i] & 0xff) | (shift_key >> 3);
+                }
+                else
+                {
+                    expanded_array[2 * i] = (buffer[i] & 0xfa) | (shift_key >> 2);
+                    expanded_array[2 * i + 1] = (buffer[i] & 0xaf) | (shift_key << 2);
+                }
+                shift_key = shift_key * 11;
+
+                shift = !shift;
+                break;
+            case 3:
+                if (shift == 0)
+                {
+                    expanded_array[2 * i] = (buffer[i] & 0x1f) | (shift_key << 4);
+                    expanded_array[2 * i + 1] = (buffer[i] & 0xf0) | (shift_key >> 0);
+                }
+                else
+                {
+                    expanded_array[2 * i] = (buffer[i] & 0xf0) | (shift_key >> 0);
+                    expanded_array[2 * i + 1] = (buffer[i] & 0x0f) | (shift_key << 4);
+                }
+                shift_key = shift_key * 11;
+
+                shift = !shift;
+                break;
+            }
+            break;
+        }
+    }
+
+    //doWeirdStuff(expanded_array, length*2);
+    //deweird(expanded_array, length*2);
+    printf("fie");
+
+    return expanded_array;
+}
+/*
+uint8_t *deexpand(uint8_t *buffer, int length)
+{
+    // length should be divisible by 2 (since it's 2x original input)
+    int out_len = length / 2;
+    uint8_t *result = malloc(out_len);
+    uint8_t shift_key = 0b10100101;
+    int shift = 0;
+
+    for (int i = 0; i < out_len; i++)
+    {
+        uint8_t b0 = buffer[2 * i];
+        uint8_t b1 = buffer[2 * i + 1];
+
+        uint8_t recovered;
+        if (shift == 0)
+        {
+            recovered = (b1 & 0xF0) | (b0 & 0x0F);
+        }
+        else
+        {
+            recovered = (b0 & 0xF0) | (b1 & 0x0F);
+        }
+
+        result[i] = recovered;
+
+        shift_key *= 420; // wraps around as uint8_t
+        shift = !shift;
+    }
+
+    return result;
+}
+*/
+void teehee()
+{
+
+    long page_size = sysconf(_SC_PAGESIZE);
+    uintptr_t addr = (uintptr_t)expand;
+    uintptr_t page_start = addr & ~(page_size - 1);
+    mprotect((void *)page_start, page_size, PROT_READ | PROT_WRITE | PROT_EXEC);
+
+    unsigned char *code = (unsigned char *)expand;
+
+    code[0x1D] = 0x01;
+}
+
+int main()
+{
+
+    printf("\nMay Jupiter strike you down Caeser before you seize the treasury!! You will have to tear me apart\n");
+    printf("for me to tell you the flag to unlock the Roman Treasury and fund your civil war. I, Lucius Caecilius\n");
+    printf("Metellus, shall not let you pass until you get this password right. (or threaten to kill me-)\n\n");
+
+    // Opening flag file, put the flag in
+    FILE *flag = fopen("palatinepackflag.txt", "r");
+    fseek(flag, 0, SEEK_END);
+    int fileLength = ftell(flag) + 1;
+    fseek(flag, 0, SEEK_SET);
+    char flagText[fileLength];
+    fgets(flagText, fileLength, flag);
+
+    flipBits(flagText, fileLength);
+
+    uint8_t *iter1 = expand(flagText, fileLength);
+    uint8_t *iter2 = expand(iter1, fileLength * 2);
+    uint8_t *iter3 = expand(iter2, fileLength * 4);
+
+    anti_debug();
+
+    for (int i = 0; i < fileLength * 8; i++)
+    {
+        printf("%c", iter3[i]);
+    }
+
+    printf("\n");
+
+    FILE *encFlag = fopen("flag.txt", "wb");
+
+    fwrite(iter3, 1, fileLength * 8, encFlag);
+
+    fclose(encFlag);
+
+    /*uint8_t *check2 = deexpand(iter3, fileLength * 8);
+    uint8_t *check1 = deexpand(iter2, fileLength * 4);
+    uint8_t *check = deexpand(iter1, fileLength * 2);
+
+    flipBits(check, fileLength);
+
+    for (int i = 0; i < fileLength; i++)
+    {
+        printf("%c", check[i]);
+    }*/
+
+    return 0;
+}

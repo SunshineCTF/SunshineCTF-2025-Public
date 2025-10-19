@@ -1,0 +1,57 @@
+{
+    "1" : {
+        "name": "LunarCoins",
+        "description": "Purchase our in-game LunarCoins to do trades and purchase plasma tools from players!",
+        "price": "25 LunarXMR"
+    },
+    "2" : {
+        "name": "Plasma Spanner",
+        "description": "Essential tool for repairing your starship hull in deep space battles.",
+        "price": "40 LunarXMR"
+    },
+    "3" : {
+        "name": "Quantum Fuel Cell",
+        "description": "High-efficiency fuel core to extend warp drive jumps.",
+        "price": "120 LunarXMR"
+    },
+    "4" : {
+        "name": "Asteroid Mining Drill",
+        "description": "Portable drill for harvesting rare minerals from asteroid belts.",
+        "price": "300 LunarXMR"
+    },
+    "5" : {
+        "name": "Holographic Map",
+        "description": "Displays real-time navigation of nearby wormholes and star clusters.",
+        "price": "75 LunarXMR"
+    },
+    "6" : {
+        "name": "Zero-G Grappling Hook",
+        "description": "Allows quick movement between derelict ships in zero gravity.",
+        "price": "60 LunarXMR"
+    },
+    "7" : {
+        "name": "Photon Blaster Mk II",
+        "description": "Hand-held energy weapon with adjustable plasma burst settings.",
+        "price": "500 LunarXMR"
+    },
+    "8" : {
+        "name": "Cryo-Sleep Pod",
+        "description": "Compact pod that allows safe travel through long interstellar voyages.",
+        "price": "1000 LunarXMR"
+    },
+    "9" : {
+        "name": "Nano-Repair Kit",
+        "description": "Self-replicating nanobots that fix armor and spacecraft panels instantly.",
+        "price": "200 LunarXMR"
+    },
+    "10" : {
+        "name": "Cosmic Beacon",
+        "description": "Signal transmitter capable of sending SOS beacons across galaxies.",
+        "price": "85 LunarXMR"
+    },
+    "11" : {
+        "name": "Meteor Shield Generator",
+        "description": "Deploys a temporary shield to protect against incoming asteroids and debris.",
+        "price": "450 LunarXMR"
+    }
+}

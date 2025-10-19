@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  relay:
+    build: ./src
+    container_name: relay-challenge
+    ports:
+      - "25401:25401"   # expose the socket to the host
+    restart: always

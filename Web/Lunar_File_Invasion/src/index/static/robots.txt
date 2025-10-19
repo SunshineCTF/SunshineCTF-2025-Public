@@ -1,0 +1,6 @@
+# don't need web scrapers scraping these sensitive files:
+
+Disallow: /.gitignore_test
+Disallow: /login
+Disallow: /admin/dashboard
+Disallow: /2FA

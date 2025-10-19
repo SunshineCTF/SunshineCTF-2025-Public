@@ -1,0 +1,10 @@
+TARGET := canaveral 
+
+NX := 1
+RELRO := 1
+
+DOCKER_IMAGE := i95-canaveral
+DOCKER_PORTS := 25603
+DOCKER_TIMELIMIT := 30
+
+PUBLISH_BUILD := $(TARGET)

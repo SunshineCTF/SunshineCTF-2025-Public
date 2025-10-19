@@ -1,0 +1,5 @@
+services:
+  scripting-hail-mary:
+    build: ./
+    ports:
+    - "0.0.0.0:25201:25201"

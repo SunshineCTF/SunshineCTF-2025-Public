@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mission: FLAG</title>
+  <style>
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:#000;color:#cbeff6;display:flex;align-items:center;justify-content:center}
+    .box{width:92%;max-width:720px;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);text-align:center}
+    h1{margin:0 0 8px;font-size:28px}
+    .muted{opacity:0.85}
+    .flag{margin-top:18px;padding:16px;border-radius:10px;background:rgba(0,0,0,0.55);border:1px solid rgba(102,240,255,0.06);font-family:monospace;font-size:18px;white-space:pre-wrap;color:#dffcff}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Mission Control — FLAG</h1>
+    <div class="muted">Authorized access confirmed. Presenting mission artifact:</div>
+    <div class="flag" style="color: green;">
+      {{ flag }}
+    </div>
+  </div>
+</body>
+</html>

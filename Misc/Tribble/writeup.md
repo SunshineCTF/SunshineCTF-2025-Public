@@ -1,0 +1,1 @@
+The player must find any website that allows you to view/download another Minecraft player's skin. The flag is in the skin just outside the default rendering one would see ingame, although some parts of the flag bleed into the skin's 3d model which is previewed on these sites, providing a hint that one must open the skin file to get the flag.

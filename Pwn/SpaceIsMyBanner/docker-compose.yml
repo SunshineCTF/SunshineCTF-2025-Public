@@ -1,0 +1,13 @@
+services:
+  space-is-my-banner:
+    build: ./src
+    # needed for /tmp for the tmux server... yeah this could be bad... no there's not a nice way around this.
+    read_only: false
+    ports:
+    - "25002:25002"
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 500M
+    restart: always

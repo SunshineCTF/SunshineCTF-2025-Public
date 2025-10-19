@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  relay:
+    build: .
+    container_name: plutonian-challenge
+    ports:
+      - "25403:25403"   # expose the socket to the host
+    restart: always

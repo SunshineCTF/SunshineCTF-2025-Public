@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <div>
+        <img src="" alt="Image of Alien">
+        <form action="{{url_for('index.login')}}" method="POST">
+            <!-- TODO: use proper clean CSS stylesheets bruh -->
+            <p style="color: red;"> {{ err_msg }} </p>
+            <!-- NOTE: this is unsafe could lead to XSS, bcs the CSRF is never gonna have a > or < it's ok... -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <label for="Email">Email</label>
+            <input type="text" name="email">
+
+            <label for="Password">Password</label>
+            <input type="password" name="password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

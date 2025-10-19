@@ -1,0 +1,12 @@
+services:
+  iws:
+    build: ./src
+    ports:
+      - "127.0.0.1:25304:8000"
+    container_name: iws
+    dns:
+      - 1.1.1.1
+
+    environment:
+    - DOMAIN=supernova.sunshinectf.games
+    - DEBUG=FALSE

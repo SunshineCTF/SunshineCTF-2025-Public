@@ -1,0 +1,11 @@
+services:
+  astrojit-ai:
+    build: .
+    ports:
+    - "25006:25006"
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 500M
+    restart: always

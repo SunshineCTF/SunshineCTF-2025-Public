@@ -1,0 +1,85 @@
+2025-09-01T00:00:00.001Z [HK] [POWER] Solar Array Current: 0.00 A | Battery Voltage: 26.7 V | SOC: 87%
+2025-09-01T00:00:00.009Z [HK] [THERMAL] Radiator Temp: 15.2 °C | Bus Temp: 14.9 °C | Battery Temp: 16.1 °C
+2025-09-01T00:00:00.020Z [COMM] Beacon Sent | Downlink Power: 4.8 W | S-Band RSSI: -68.2 dBm
+2025-09-01T00:00:00.025Z [ADCS] Wheel Speeds: X=0 rpm Y=0 rpm Z=0 rpm | Mode: IDLE
+
+2025-09-02T06:15:11.334Z [HK] [POWER] Solar Array Current: 1.45 A | Battery Voltage: 28.1 V | SOC: 96%
+2025-09-02T06:15:11.342Z [PAYLOAD] Camera Heater: OFF | CCD Temp: -33.8 °C | Status: STANDBY
+2025-09-02T06:15:11.365Z [COMM] Link Margin: 3.2 dB | Uplink Nominal | Frame Error Rate: 0.01%
+
+2025-09-03T14:22:49.112Z [CMD] Uplink Received: CMD[0x41] ENABLE_PAYLOAD | Source: GS-HOUSTON | CRC OK
+2025-09-03T14:22:49.134Z [CMD_ACK] CMD[0x41] → EXECUTED SUCCESSFULLY
+2025-09-03T14:22:49.200Z [PAYLOAD] Payload Power: ON | CCD Temp: -29.2 °C | Status: ACTIVE
+
+2025-09-04T09:03:25.456Z [HK] [THERMAL] Radiator Temp: 22.7 °C | Bus Temp: 19.3 °C | Battery Temp: 20.4 °C
+2025-09-04T09:03:25.471Z [HK] [POWER] Solar Array Current: 1.19 A | Battery Voltage: 27.2 V | SOC: 89%
+
+2025-09-05T11:00:00.000Z [SYNC] Time Update Received from GS-DAR | Delta: +1.843 ms | Sync OK
+2025-09-05T11:00:00.047Z [ADCS] Momentum Dump Initiated | Thruster Pulse: -Y, 0.42 s | ΔV: 0.0010 m/s
+
+2025-09-06T13:05:17.445Z [ANOMALY] [THERMAL] Star Tracker Temp High: 46.2 °C (LIMIT: 45.0 °C)
+2025-09-06T13:05:17.487Z [ADCS] Star Tracker Mode AUTO → SAFE (thermal protection)
+2025-09-06T13:05:17.495Z [EVENT] Attitude Control Reconfig: Coarse Sun Sensors engaged
+
+2025-09-07T15:44:33.211Z [COMM] Beacon Sent | Downlink Power: 5.2 W | S-Band RSSI: -67.9 dBm
+2025-09-07T15:44:33.224Z [HK] [POWER] Solar Array Current: 1.36 A | Battery Voltage: 27.9 V | SOC: 93%
+
+2025-09-08T04:55:08.675Z [PAYLOAD] Camera Heater: ON | CCD Temp: -34.2 °C | Status: ACTIVE
+2025-09-08T04:55:08.699Z [ADCS] Wheel Speeds: X=375 rpm Y=-295 rpm Z=241 rpm | Mag Torquer Cmd: 0x02
+
+2025-09-09T18:22:10.442Z [CMD] Uplink Received: CMD[0x52] RESET_COMM_IF | Source: GS-HOUSTON | CRC OK
+2025-09-09T18:22:10.475Z [CMD_ACK] CMD[0x52] → EXECUTED SUCCESSFULLY
+2025-09-09T18:22:10.509Z [COMM] Transponder Reset | Primary → ACTIVE
+
+2025-09-10T21:10:00.310Z [HK] [THERMAL] Radiator Temp: 18.8 °C | Bus Temp: 17.6 °C | Battery Temp: 18.3 °C
+2025-09-10T21:10:00.328Z [HK] [POWER] Solar Array Current: 0.92 A | Battery Voltage: 26.4 V | SOC: 82%
+
+2025-09-11T07:47:44.002Z [ADCS] Gyro Drift Compensation Updated | Δ = +0.003 deg/s
+2025-09-11T07:47:44.026Z [COMM] Link Margin: 2.9 dB | Frame Error Rate: 0.03%
+
+2025-09-12T12:34:12.998Z [PAYLOAD] CCD Exposure Captured | FileID: IMG_20250912_001 | Size: 14.2 MB
+2025-09-12T12:34:13.021Z [PAYLOAD] Downlink Scheduled for 2025-09-12T13:15:00Z
+
+2025-09-13T13:15:00.003Z [COMM] Downlink Started | Channel: S-Band | FileID: IMG_20250912_001
+2025-09-13T13:15:15.442Z [COMM] Downlink Completed | Integrity Check: OK | FileID: IMG_20250912_001
+
+2025-09-14T16:00:45.115Z [HK] [POWER] Solar Array Current: 1.27 A | Battery Voltage: 27.3 V | SOC: 91%
+2025-09-14T16:00:45.127Z [ADCS] Wheel Speeds: X=421 rpm Y=-338 rpm Z=259 rpm
+
+2025-09-15T09:11:02.334Z [CMD] Uplink Received: CMD[0x77] ENTER_SAFE_MODE | Source: GS-HOUSTON | CRC OK
+2025-09-15T09:11:02.366Z [CMD_ACK] CMD[0x77] → EXECUTED SUCCESSFULLY
+2025-09-15T09:11:02.412Z [EVENT] Spacecraft Mode: NOMINAL → SAFE
+
+2025-09-16T03:30:12.514Z [HK] [THERMAL] Radiator Temp: 10.7 °C | Bus Temp: 9.8 °C | Battery Temp: 11.1 °C
+2025-09-16T03:30:12.526Z [COMM] Beacon Sent | Downlink Power: 4.6 W | S-Band RSSI: -70.1 dBm
+
+2025-09-17T19:55:23.998Z [EVENT] Spacecraft Mode: SAFE → NOMINAL
+2025-09-17T19:55:24.042Z [ADCS] Star Tracker Mode SAFE → AUTO
+2025-09-17T19:55:24.066Z [HK] [POWER] Solar Array Current: 1.38 A | Battery Voltage: 28.0 V | SOC: 95%
+
+2025-09-18T11:22:49.674Z [COMM] Link Margin: 3.5 dB | Frame Error Rate: 0.00%
+2025-09-18T11:22:49.693Z [PAYLOAD] CCD Temp: -31.5 °C | Status: ACTIVE
+
+2025-09-19T06:07:05.201Z [ANOMALY] [ADCS] Wheel Speed Y > Limit: -615 rpm (LIMIT: -600 rpm)
+2025-09-19T06:07:05.232Z [ADCS] Momentum Dump Initiated | Thruster Pulse: +Z, 0.50 s | ΔV: 0.0014 m/s
+
+2025-09-20T14:18:33.502Z [COMM] Beacon Sent | Downlink Power: 5.1 W | S-Band RSSI: -67.3 dBm
+2025-09-20T14:18:33.514Z [HK] [THERMAL] Radiator Temp: 23.1 °C | Bus Temp: 20.8 °C | Battery Temp: 21.7 °C
+
+2025-09-21T05:55:44.664Z [CMD] Uplink Received: CMD[0x2C] CALIBRATE_SENSORS | Source: GS-DAR | CRC OK
+2025-09-21T05:55:44.692Z [CMD_ACK] CMD[0x2C] → EXECUTED SUCCESSFULLY
+2025-09-21T05:55:44.755Z [DIAG] Magnetometer Bias: +0.011 | Gyro Drift: -0.002
+
+2025-09-22T08:42:01.002Z [HK] [POWER] Solar Array Current: 1.07 A | Battery Voltage: 26.9 V | SOC: 85%
+2025-09-22T08:42:01.021Z [COMM] Link Margin: 1.9 dB | UHF Downlink Attempt FAILED
+2025-09-22T08:42:01.038Z [EVENT] COMM State → BACKUP_TRANSPONDER
+
+2025-09-23T17:33:16.491Z [PAYLOAD] CCD Exposure Captured | FileID: IMG_20250923_004 | Size: 15.7 MB
+2025-09-23T17:33:16.509Z [PAYLOAD] Downlink Scheduled for 2025-09-23T18:05:00Z
+
+2025-09-24T18:05:00.008Z [COMM] Downlink Started | Channel: S-Band | FileID: IMG_20250923_004
+2025-09-24T18:05:14.432Z [COMM] Downlink Completed | Integrity Check: OK | FileID: IMG_20250923_004
+
+2025-09-25T10:11:47.333Z [HK] [THERMAL] Radiator Temp: 19.2 °C | Bus Temp: 18.5 °C | Battery Temp: 18.9 °C
+2025-09-25T10:11:47.350Z [HK] [POWER] Solar Array Current: 1.12 A | Battery Voltage: 27.0 V | SOC: 88%
+2025-09-25T10:11:47.372Z [COMM] Beacon Sent | Downlink Power: 4.9 W | S-Band RSSI: -68.7 dBm

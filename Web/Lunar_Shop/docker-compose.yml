@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  chal:
+    build:
+      # setting the context to the current directory, this is a safety feature
+      # so only files within that path are allowed to be pulled or copied, and not anything outside of it
+      context: src/app
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:25306:8000"
+    environment:
+      - DOMAIN=meteor.sunshinectf.games

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Lunar CMS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+        }
+
+        .header h1 {
+            color: #ff55ff;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 85, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .header .subtitle {
+            color: #9f9fff;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 85, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 85, 255, 0.8), 0 0 40px rgba(255, 85, 255, 0.3); }
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);
+            border: 1px solid rgba(255, 85, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255, 0, 255, 0.3);
+            border-color: rgba(255, 85, 255, 0.4);
+        }
+
+        .card h3 {
+            color: #ff55ff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            opacity: 0.8;
+        }
+
+        .card p {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+
+        .expandable-section {
+            margin-top: 30px;
+        }
+
+        .expand-toggle {
+            background: linear-gradient(45deg, #ff55ff, #9f55ff);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 85, 255, 0.3);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .expand-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 85, 255, 0.5);
+        }
+
+        .expand-toggle .arrow {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .expandable-content.active {
+            max-height: 500px;
+        }
+
+        .expandable-content .content-inner {
+            padding: 25px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.2), rgba(255, 50, 150, 0.2));
+            border: 2px solid rgba(255, 85, 85, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .warning-box h4 {
+            color: #ff6666;
+            margin-top: 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .feature-list li::before {
+            content: '🛸';
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .alien-decoration {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .alien-decoration:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .alien-decoration:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .alien-decoration:nth-child(3) { bottom: 30%; left: 8%; animation-delay: 4s; }
+        .alien-decoration:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating alien decorations -->
+    <div class="alien-decoration">👽</div>
+    <div class="alien-decoration">🛸</div>
+    <div class="alien-decoration">🌌</div>
+    <div class="alien-decoration">⭐</div>
+
+    {% include 'nav.html' %}
+
+    <div class="container">
+        <div class="header">
+            <h1>Lunar File Management CMS</h1>
+            <div class="subtitle">
+                <span class="status-indicator">BETA VERSION</span>
+                Intergalactic Resource Management System
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+                <h3>
+                    <span class="card-icon">🌙</span>
+                    System Overview
+                </h3>
+                <p>Welcome to the Lunar CMS, the premier file management solution designed specifically for the Lunar Society's intergalactic operations.</p>
+                <p>This platform enables secure document storage, resource allocation tracking, and communication logs between Earth and our lunar outposts.</p>
+                <ul class="feature-list">
+                    <li>Quantum-encrypted file storage</li>
+                    <li>Multi-planetary synchronization</li>
+                    <li>Alien-compatible interface</li>
+                    <li>Zero-gravity optimized performance</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>
+                    <span class="card-icon">🔒</span>
+                    Security Features
+                </h3>
+                <p>Our advanced security protocols protect against both terrestrial and extraterrestrial threats.</p>
+                <div class="warning-box">
+                    <h4>Recent Security Updates</h4>
+                    <p>We've recently implemented additional hardening measures after detecting unauthorized access attempts from unknown entities.</p>
+                </div>
+                <p>All file access is logged and monitored by our AI security systems.</p>
+            </div>
+        </div>
+
+        <div class="expandable-section">
+            <button class="expand-toggle" onclick="toggleExpand()">
+                <span>🛸 Learn About Our Mission</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="expandable-content" id="missionContent">
+                <div class="content-inner">
+                    <h3>🌌 The Lunar Society Initiative</h3>
+                    <p>The Lunar Society represents a coalition of intergalactic beings working together to establish sustainable colonies across multiple star systems. Our mission encompasses:</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <h4>🪐 Resource Management</h4>
+                        <p>Efficient allocation and tracking of resources across lunar bases, asteroid mining operations, and deep space research stations. Our CMS handles everything from oxygen recycling data to rare mineral extraction logs.</p>
+                        
+                        <h4>📡 Interstellar Communication</h4>
+                        <p>Maintaining communication networks between Earth, Luna, Mars colonies, and our reconnaissance teams in the outer rim. All messages are processed through our secure file management system.</p>
+                        
+                        <h4>🔬 Research Coordination</h4>
+                        <p>Collaborative research projects involving multiple species require sophisticated document management. Our platform supports file formats from over 47 different alien civilizations.</p>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>🚨 Security Alert</h4>
+                        <p>Recent intrusion attempts have been detected from unauthorized entities attempting to access classified galactic coordinates and resource manifests. Our security team has implemented additional countermeasures, but remain vigilant.</p>
+                        <p><em>All file access requests are now subject to enhanced monitoring protocols.</em></p>
+                    </div>
+
+                    <p>Through this CMS, we ensure that our diverse community of humans, lunar inhabitants, and allied extraterrestrial species can collaborate effectively while maintaining the highest standards of operational security.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleExpand() {
+            const button = document.querySelector('.expand-toggle');
+            const content = document.getElementById('missionContent');
+            
+            button.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Add some interactive cosmic dust effect
+        function createCosmicDust() {
+            const dust = document.createElement('div');
+            dust.innerHTML = '✨';
+            dust.style.position = 'fixed';
+            dust.style.left = Math.random() * 100 + 'vw';
+            dust.style.top = Math.random() * 100 + 'vh';
+            dust.style.fontSize = '0.8rem';
+            dust.style.opacity = '0.3';
+            dust.style.pointerEvents = 'none';
+            dust.style.zIndex = '-1';
+            dust.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+            
+            document.body.appendChild(dust);
+            
+            setTimeout(() => {
+                dust.remove();
+            }, 8000);
+        }
+
+        // Create cosmic dust periodically
+        setInterval(createCosmicDust, 2000);
+    </script>
+</body>
+</html>

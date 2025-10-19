@@ -1,0 +1,13 @@
+[project]
+name = "src"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.2",
+    "gevent>=25.9.1",
+    "gunicorn>=23.0.0",
+    "markupsafe>=3.0.2",
+    "pycryptodome>=3.23.0",
+]

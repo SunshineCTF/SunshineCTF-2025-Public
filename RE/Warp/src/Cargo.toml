@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+    "w-userspace",
+]
+default-members = ["w-userspace"]
+
+[workspace.dependencies]
+aya = { version = "0.13.1", default-features = false }
+libc = { version = "0.2.175", default-features = false }
+
+[profile.release]
+opt-level = 0 # no optimizations
+lto = false
+codegen-units = 1
+panic = "abort"
+strip = "none"
+debug = true
+incremental = false

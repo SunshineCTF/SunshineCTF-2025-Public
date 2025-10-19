@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#0b0f18; color:#d8f6ff; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #2a3c4f; padding: 10px; text-align: left; }
+    th { background: #102030; }
+    tr:nth-child(even){ background: #111a28; }
+    .err { color: #ff8080; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <!-- Display error message if set -->
+  {% if err_msg %}
+    <p class="err">{{ err_msg }}</p>
+  {% endif %}
+
+  <h1>Available Space Products 🚀</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ product[0] }}</td>
+        <td>{{ product[1] }}</td>
+        <td>{{ product[2] }}</td>
+        <td>{{ product[3] }}</td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>

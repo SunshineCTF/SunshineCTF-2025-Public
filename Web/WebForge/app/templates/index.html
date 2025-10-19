@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-section">
+    <h1>Welcome to Space Forge</h1>
+    <p class="subtitle">Your Intergalactic Web Tools Platform</p>
+    
+    <div class="card">
+        <h2>About This Tool</h2>
+        <p>Embark on a journey through the cosmos with our advanced web tools designed for space explorers and security researchers alike.</p>
+        <p>Navigate through the vastness of the web with our powerful SSRF testing tool, but remember - with great power comes great responsibility.</p>
+        
+        <div class="features">
+            <h3>Features:</h3>
+            <ul>
+                <li>Intergalactic SSRF Testing</li>
+                <li>Secure Access Controls</li>
+                <li>Cosmic Error Handling</li>
+                <li>Zero-Grade Performance</li>
+            </ul>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="{{ url_for('fetch') }}" class="btn">Launch SSRF Tool</a>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Mission Briefing</h2>
+        <p>Your mission, should you choose to accept it, is to explore the depths of our web application and uncover its secrets.</p>
+        <p>Use the tools at your disposal wisely, and remember to always follow intergalactic web protocols.</p>
+        <div class="terminal">
+            <span class="command">$</span> Initializing space forge systems...<br>
+            <span class="success">✓</span> Navigation systems online<br>
+            <span class="success">✓</span> Security protocols engaged<br>
+            <span class="success">✓</span> Ready for launch
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.welcome-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--neon-purple);
+    margin-bottom: 3rem;
+    text-shadow: 0 0 10px rgba(179, 136, 255, 0.5);
+}
+
+.features {
+    text-align: left;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 3px solid var(--neon-blue);
+}
+
+.features h3 {
+    margin-top: 0;
+    color: var(--neon-purple);
+}
+
+.features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.features li:before {
+    content: '→';
+    color: var(--neon-blue);
+    position: absolute;
+    left: 0;
+}
+
+.cta-buttons {
+    margin: 2rem 0;
+}
+
+.terminal {
+    margin-top: 2rem;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--meteor-grey);
+}
+
+.command {
+    color: var(--neon-blue);
+    margin-right: 0.5rem;
+}
+</style>
+{% endblock %}

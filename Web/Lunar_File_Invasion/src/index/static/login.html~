@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <div>
+        <img src="" alt="Image of Alien">
+        <form action="{{url_for('index.login')}}" method="POST">
+            <!-- TODO: use proper clean CSS stylesheets bruh -->
+            <p style="color: red;"> {{ err_msg }} </p>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <label for="Email">Email</label>
+            <input value="admin@lunarfiles.muhammadali" type="text" name="email">
+
+            <label for="Password">Password</label>
+            <!-- just to save time while developing, make sure to remove this in prod !  -->
+            <input value="jEJ&(32)DMC<!*###" type="text" name="password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

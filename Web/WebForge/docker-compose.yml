@@ -1,0 +1,13 @@
+services:
+  forge:
+    build: ./app
+    ports:
+      - "127.0.0.1:25303:8000"
+    tmpfs:
+      - /tmp
+    container_name: forge
+    restart: always
+    read_only: true
+    environment:
+    - DOMAIN=wormhole.sunshinectf.games
+    - DEBUG=FALSE

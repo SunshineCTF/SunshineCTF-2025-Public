@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="fetch-container">
+    <h1>SSRF Testing Tool</h1>
+    <p class="subtitle">Intergalactic Server-Side Request Forge</p>
+    
+    <div class="card">
+        <h2>Request Forger</h2>
+        <p>Enter a URL to test server-side requests. Use responsibly, space explorer!</p>
+        
+        <div class="form-container">
+            <form method="POST" class="fetch-form">
+                <div class="form-group">
+                    <label for="url">Target URL</label>
+                    <input type="url" id="url" name="url" placeholder="https://example.com" required>
+                    <small class="hint">Enter a complete URL including http:// or https://</small>
+                </div>
+                <button type="submit" class="btn">Launch Request</button>
+            </form>
+        </div>
+        
+        {% if result is defined %}
+        <div class="result-section">
+            <div class="terminal">
+                {% if result.error %}
+                    <span class="error">ERROR:</span> {{ result.error }}
+                {% else %}
+                    <pre>{{ result.text|e }}</pre>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="card">
+        <h2>Mission Parameters</h2>
+        <div class="mission-stats">
+            <div class="stat">
+                <span class="stat-value">Active</span>
+                <span class="stat-label">Status</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">SSRF-2025</span>
+                <span class="stat-label">Protocol</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">Secure</span>
+                <span class="stat-label">Connection</span>
+            </div>
+        </div>
+        
+        <div class="terminal">
+            <span class="command">$</span> Ready for request...<br>
+            {% if result is defined %}
+                {% if result.error %}
+                    <span class="error">✗</span> Request failed: {{ result.error }}
+                {% else %}
+                    <span class="success">✓</span> Request completed with status code {{ result.status_code }}
+                {% endif %}
+            {% else %}
+                <span class="hint">Awaiting mission parameters...</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.fetch-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.fetch-form {
+    margin: 2rem 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--neon-purple);
+    font-weight: 500;
+}
+
+.hint {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--meteor-grey);
+    margin-top: 0.3rem;
+}
+
+.result-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(179, 136, 255, 0.2);
+}
+
+.mission-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.stat {
+    padding: 0 1rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--neon-blue);
+    margin-bottom: 0.3rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--meteor-grey);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.terminal {
+    margin-top: 1rem;
+    min-height: 80px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--meteor-grey);
+    border-radius: 4px;
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    color: #33FF33;
+}
+
+.command {
+    color: var(--neon-blue);
+    margin-right: 0.5rem;
+}
+
+.error {
+    color: #FF6B6B;
+}
+
+.success {
+    color: #51E3A5;
+}
+</style>
+{% endblock %}

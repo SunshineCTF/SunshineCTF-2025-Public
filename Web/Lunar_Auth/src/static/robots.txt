@@ -1,0 +1,3 @@
+# tired of these annoying search engine bots scraping the admin panel page logins:
+
+Disallow: /admin

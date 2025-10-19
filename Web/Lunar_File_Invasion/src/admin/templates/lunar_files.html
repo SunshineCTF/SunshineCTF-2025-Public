@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- TODO: have a message display saying there are no files in the vault if there are none !  -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar File Management CMS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+        }
+
+        .header h1 {
+            color: #ff55ff;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 85, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .header .subtitle {
+            color: #9f9fff;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 85, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 85, 255, 0.8), 0 0 40px rgba(255, 85, 255, 0.3); }
+        }
+
+        .files-table {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);
+            border: 1px solid rgba(255, 85, 255, 0.2);
+        }
+
+        .table-header {
+            background: rgba(255, 85, 255, 0.2);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 80px 1fr 200px;
+            gap: 20px;
+            font-weight: bold;
+            color: #ff55ff;
+            font-size: 1.1rem;
+        }
+
+        .table-row {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 80px 1fr 200px;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .table-row:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 255, 0.2);
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-view {
+            background: linear-gradient(45deg, #ff55ff, #9f55ff);
+            color: white;
+            margin-right: 10px;
+            box-shadow: 0 5px 15px rgba(255, 85, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 85, 255, 0.5);
+        }
+
+        .btn-download:hover {
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
+        }
+
+        .file-viewer {
+            display: none;
+            background: rgba(15, 12, 41, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .file-viewer-content {
+            max-width: 90%;
+            margin: 2% auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 85, 255, 0.3);
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.3);
+        }
+
+        .file-viewer-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 85, 255, 0.1);
+        }
+
+        .file-viewer-header h3 {
+            margin: 0;
+            color: #ff55ff;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(255, 85, 255, 0.5);
+        }
+
+        .btn-close {
+            background: linear-gradient(45deg, #ff4757, #ff3742);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+
+        .btn-close:hover {
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+        }
+
+        .file-content {
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .file-content pre {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .error-msg {
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.2), rgba(255, 50, 150, 0.2));
+            border: 2px solid rgba(255, 85, 85, 0.5);
+            color: #ff6666;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .error-msg::before {
+            content: '⚠️';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #9f9fff;
+            font-size: 1.1rem;
+        }
+
+        .loading::after {
+            content: '';
+            animation: dots 2s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        .alien-decoration {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .alien-decoration:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .alien-decoration:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .alien-decoration:nth-child(3) { bottom: 30%; left: 8%; animation-delay: 4s; }
+        .alien-decoration:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 60px 1fr 150px;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .btn-view {
+                margin-right: 5px;
+            }
+        }
+    </style>
+
+    {% include 'nav.html' %}
+</head>
+<body>
+    <!-- Floating alien decorations -->
+    <div class="alien-decoration">👽</div>
+    <div class="alien-decoration">🛸</div>
+    <div class="alien-decoration">🌌</div>
+    <div class="alien-decoration">⭐</div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Lunar File Management CMS</h1>
+            <div class="subtitle">
+                <span class="status-indicator">BETA VERSION</span>
+                Intergalactic Resource Management System
+            </div>
+        </div>
+
+        <div class="files-table">
+            <div class="table-header">
+                <div>ID</div>
+                <div>File Name</div>
+                <div>Actions</div>
+            </div>
+            
+            
+            {% for element in dict_list %}
+                <div class="table-row">
+                    <div>{{ element.id }}</div>
+                    <div>{{ element.name }}</div>
+                    <div>
+                        <button class="btn btn-view" onclick="viewFile('{{ element.name | urlencode }}')">🔍 View</button>
+                    </div>
+                </div>
+            {% endfor %}
+            
+
+        </div>
+    </div>
+
+    <!-- File Viewer Modal -->
+    <div id="fileViewer" class="file-viewer">
+        <div class="file-viewer-content">
+            <div class="file-viewer-header">
+                <h3 id="viewerTitle">🛸 File Viewer</h3>
+                <button class="btn btn-close" onclick="hideFileViewer()">✖ Hide</button>
+            </div>
+            <div class="file-content">
+                <div id="fileContentArea"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewFile(filename) {
+            const viewer = document.getElementById('fileViewer');
+            const title = document.getElementById('viewerTitle');
+            const contentArea = document.getElementById('fileContentArea');
+            
+            // Show viewer
+            viewer.style.display = 'block';
+            title.innerHTML = `🛸 Viewing: ${filename}`;
+            
+            // Show loading
+            contentArea.innerHTML = '<div class="loading">🌌 Loading file content from quantum storage</div>';
+            
+            // Simulate file fetch with realistic delay
+            setTimeout(() => {
+                fetchFileContent(filename);
+            }, 1200);
+        }
+
+        function fetchFileContent(filename) {
+            // no need ot URLEncode this is JS argument being pssed in,
+            // plug we already URLencoded via flask's | urlencode
+            const viewUrl = `/admin/download/${filename}`;
+            
+            fetch(viewUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(content => {
+                    const contentArea = document.getElementById('fileContentArea');
+                    contentArea.innerHTML = `<pre>${escapeHtml(content)}</pre>`;
+                })
+                .catch(error => {
+                    const contentArea = document.getElementById('fileContentArea');
+                    contentArea.innerHTML = `<div class="error-msg">
+                        <h4>🚨 Access Denied</h4>
+                        <p>Error loading file: ${escapeHtml(error.message)}</p>
+                        <p><em>This incident has been logged with our security systems.</em></p>
+                    </div>`;
+                });
+        }
+
+        function hideFileViewer() {
+            document.getElementById('fileViewer').style.display = 'none';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Close viewer when clicking outside content
+        document.getElementById('fileViewer').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideFileViewer();
+            }
+        });
+
+        // Close viewer with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideFileViewer();
+            }
+        });
+
+        // Add some interactive cosmic dust effect
+        function createCosmicDust() {
+            const dust = document.createElement('div');
+            dust.innerHTML = '✨';
+            dust.style.position = 'fixed';
+            dust.style.left = Math.random() * 100 + 'vw';
+            dust.style.top = Math.random() * 100 + 'vh';
+            dust.style.fontSize = '0.8rem';
+            dust.style.opacity = '0.3';
+            dust.style.pointerEvents = 'none';
+            dust.style.zIndex = '-1';
+            dust.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+            
+            document.body.appendChild(dust);
+            
+            setTimeout(() => {
+                dust.remove();
+            }, 8000);
+        }
+
+        // Create cosmic dust periodically
+        setInterval(createCosmicDust, 2000);
+    </script>
+
+    <script>
+        // the | tojson protects against XSS attacks
+        let err_msg = {{ err_msg | tojson }};
+        if( err_msg !== "" && err_msg ){
+            const viewer = document.getElementById('fileViewer');
+            const title = document.getElementById('viewerTitle');
+            const contentArea = document.getElementById('fileContentArea');
+            
+            // Show viewer
+            viewer.style.display = 'block';            
+            contentArea.innerHTML = `<div class="error-msg">
+                <h4>🚨 Access Denied</h4>
+                <p>The following error occured when loading a file:</p><br>
+                <p style='color: red;'>${escapeHtml(err_msg)}</p><br>
+                <p><em>This incident has been logged with our security systems.</em></p>
+            </div>`;
+        }
+    </script>
+</body>
+</html>
