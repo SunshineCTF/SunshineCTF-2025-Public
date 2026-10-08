@@ -1,0 +1,29 @@
+version: "0.1"
+name: "SpaceIsMyBanner"
+author: "solarbonite"
+category: "Pwn"
+description: |-
+  # I did it again.
+  This time I'm sure I accessed a satellite.
+
+  I'm scared, it's giving me a warning message when I log in.
+
+  I think this time I may have gone too far... this seems to be some top security stuff...
+  ## Challenge info
+  Access with socat if you want to use a tty:
+  ```sh
+  socat file:`tty`,raw,echo=0 TCP:ctf.hackucf.org:25002
+  ```
+attribution: Written by solarbonite for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 150
+connection_info: nc ctf.hackucf.org 25002
+flags:
+  - "sun{wait-wait-wait-you-cannot-hack-me-you-agreed-to-not-do-that-that-is-not-fair}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

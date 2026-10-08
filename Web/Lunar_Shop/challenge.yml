@@ -1,0 +1,23 @@
+version: "0.1"
+name: "Lunar Shop"
+author: "alimuhammadsecured"
+category: "Web"
+description: |-
+  - We have amazing new products for our gaming service! Unfortunately we don't sell our unreleased `flag` product yet !
+
+  > Fuzzing is NOT allowed for this challenge, doing so will lead to IP rate limiting!
+
+  (Submit flag_1 here)
+attribution: Written by alimuhammadsecured for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 100
+connection_info: https://lunarshop.ctf.hackucf.org
+flags:
+  - "sun{baby_SQL_injection_this_is_known_as_error_based_SQL_injection_8767289082762892}"
+tags:
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

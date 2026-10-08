@@ -1,3 +1,5 @@
+name: sun25-spaceismybanner
+
 services:
   space-is-my-banner:
     build: ./src
@@ -10,4 +12,5 @@ services:
         limits:
           cpus: 0.5
           memory: 500M
-    restart: always
+          pids: 512
+    restart: unless-stopped

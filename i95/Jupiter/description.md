@@ -1,6 +1,6 @@
 Jupiter just announced their new Brightline junction... the ECHO TERMINAL!!!
 
-`nc sunshinectf.games 25607`
+`nc ctf.hackucf.org 25607`
 
 Files:
  - `jupiter`

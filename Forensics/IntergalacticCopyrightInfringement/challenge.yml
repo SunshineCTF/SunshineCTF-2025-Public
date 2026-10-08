@@ -1,0 +1,20 @@
+version: "0.1"
+name: "Intergalactic Copyright Infringement"
+author: "tsuto"
+category: "Forensics"
+description: |-
+  NASA received a notification from their ISP that it appeared that some copyrighted files were transferred to and from the ISS (Guess astronauts need movies too). We weren't able to recover the all of the files, but we were able to capture some traffic from the final download before the user signed off. If you can help recover the file that was downloaded perhaps you can shed some light on what they were doing?
+
+  * [evidence.pcapng](/files/sun/25/Forensics/IntergalacticCopyrightInfringement/evidence.pcapng)
+attribution: Written by tsuto for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 175
+flags:
+  - "sun{4rggg_sp4c3_p1r4cy}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

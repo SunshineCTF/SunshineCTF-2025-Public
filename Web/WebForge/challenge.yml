@@ -1,0 +1,20 @@
+version: "0.1"
+name: "Web Forge"
+author: "d!!!"
+category: "Web"
+description: |-
+  **NOTE FROM ADMINS**: Use of automated fuzzing tools are allowed for this challenge.
+  Fuzzing. Not Crawling. All endpoints aside from one are rate limited.
+attribution: Written by d!!! for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 250
+connection_info: https://webforge.ctf.hackucf.org
+flags:
+  - "sun{h34der_fuzz1ng_4nd_ssti_1s_3asy_bc10bf85cabe7078}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

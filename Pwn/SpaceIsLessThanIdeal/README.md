@@ -3,7 +3,7 @@ Deploy using `./docker-compose.yml`
 
 port is 25003 by default.
 
-Suggested domain of spacelessthanideal.2025.sunshinectf.games
+Suggested domain of ctf.hackucf.org
 
 # solver
 Usage:
@@ -12,5 +12,5 @@ Usage:
 ```
 example
 ```
-./solve.sh spacelessthanideal.2025.sunshinectf.games 25003 0.5
+./solve.sh ctf.hackucf.org 25003 0.5
 ``` 

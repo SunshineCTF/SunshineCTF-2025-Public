@@ -1,0 +1,22 @@
+version: "0.1"
+name: "BitsOfSpace"
+author: "anthony.js"
+category: "Crypto"
+description: |-
+  Here is a code to one of our relays, can you reach the others?
+
+  * [relay.py](/files/sun/25/Crypto/BitsOfSpace/relay.py)
+  * [voyager.bin](/files/sun/25/Crypto/BitsOfSpace/voyager.bin)
+attribution: Written by anthony.js for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 125
+connection_info: nc ctf.hackucf.org 25401
+flags:
+  - "sun{m4yb3_4_ch3ck5um_w0uld_b3_m0r3_53cur3}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

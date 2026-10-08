@@ -1,7 +1,11 @@
+name: sun25-moonclicker
+
 services:
   relay:
     build: ./src
-    container_name: moonclicker-challenge
     ports:
-      - "25402:8000"
-    restart: always
+      - "127.0.0.1:25402:8000"
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 512

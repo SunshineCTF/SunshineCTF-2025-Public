@@ -1,0 +1,26 @@
+version: "0.1"
+name: "Canaveral (2025)"
+author: "Oreomeister"
+category: Pwn
+description: |-
+  NASA Mission Control needs your help... only YOU can enter the proper launch sequence!!
+
+  Files:
+   - `canaveral`
+
+  * [canaveral-2025](/files/sun/25/i95/Canaveral/canaveral-2025)
+attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 250
+connection_info: nc ctf.hackucf.org 25603
+flags:
+  - "sun{D!d_y0u_s3e_thE_IM4P_spAce_laUncH??}"
+tags:
+  - "i95"
+  - "mini-pwn"
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

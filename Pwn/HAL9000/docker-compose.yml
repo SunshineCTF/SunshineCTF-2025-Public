@@ -1,0 +1,14 @@
+name: sun25-hal9000
+
+services:
+  hal9000:
+    build: .
+    ports:
+      - "25005:25005"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 500M
+          pids: 512

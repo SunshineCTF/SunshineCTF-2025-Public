@@ -1,0 +1,26 @@
+version: "0.1"
+name: "Miami"
+author: "Oreomeister"
+category: Pwn
+description: |-
+  Dexter is the prime suspect of being the Bay Harbor Butcher, we break into his login terminal and get the proof we need!
+
+  Files:
+   - `miami`
+
+  * [miami](/files/sun/25/i95/Miami/miami)
+attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 50
+connection_info: nc ctf.hackucf.org 25601
+flags:
+  - "sun{DeXtEr_was_!nnocent_Do4kEs_w4s_the_bAy_hRrb0ur_bu7cher_afterall!!}"
+tags:
+  - "i95"
+  - "mini-pwn"
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

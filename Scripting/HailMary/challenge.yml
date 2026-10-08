@@ -1,0 +1,19 @@
+version: "0.1"
+name: "Hail Mary"
+author: "tsuto"
+category: "Scripting"
+description: |-
+  Dr. Ryland Grace is in a tough spot! He has been tasked with performing an experiment on some "taumoeba" (Amoebas collected in the Tau Ceti system). He needs to try to breed them to meet certain biological parameters to ensure their survival when they return to Earth. See if you can help guide the experiments to find the optimal genetic code needed and you will be rewarded!
+attribution: Written by tsuto for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 175
+connection_info: nc ctf.hackucf.org 25201
+flags:
+  - "sun{wh4t_4_gr34t_pr0j3ct}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

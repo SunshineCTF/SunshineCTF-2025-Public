@@ -1,0 +1,32 @@
+version: "0.1"
+name: "SpaceIsLessThanIdeal"
+author: "solarbonite"
+category: "Pwn"
+description: |-
+  # I think i did a thing.
+  I *may* have accessed a satellite.
+
+  I can access the logs anyhow. I can't seem to access anything else.
+
+  I know I've seen that type of log viewer before, but something seems... different... about it.
+
+  Well you know the expression. Less is more!
+
+  ## Challenge info
+  Access with socat if you want to use a tty:
+  ```sh
+  socat file:`tty`,raw,echo=0 TCP:ctf.hackucf.org:25003
+  ```
+attribution: Written by solarbonite for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 225
+connection_info: nc ctf.hackucf.org 25003
+flags:
+  - "sun{less-is-more-no-really-it-is-just-a-symbolic-link}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

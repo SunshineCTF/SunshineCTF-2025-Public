@@ -1,9 +1,11 @@
-version: "3.9"
+name: sun25-plutonian
 
 services:
   relay:
     build: .
-    container_name: plutonian-challenge
     ports:
       - "25403:25403"   # expose the socket to the host
-    restart: always
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 512

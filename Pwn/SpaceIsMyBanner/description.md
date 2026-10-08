@@ -7,7 +7,7 @@ I think this time I may have gone too far... this seems to be some top security 
 ## Challenge info
 Access with socat if you want to use a tty:
 ```sh
-socat file:`tty`,raw,echo=0 TCP:spaceismybanner.2025.sunshinectf.games:25002
+socat file:`tty`,raw,echo=0 TCP:ctf.hackucf.org:25002
 ```
 
 Author: solarbonite

@@ -1,12 +1,16 @@
+name: sun25-iws
+
 services:
   iws:
     build: ./src
     ports:
       - "127.0.0.1:25304:8000"
-    container_name: iws
     dns:
       - 1.1.1.1
-
+    restart: unless-stopped
     environment:
-    - DOMAIN=supernova.sunshinectf.games
+    - DOMAIN=webhook.ctf.hackucf.org
     - DEBUG=FALSE
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 512

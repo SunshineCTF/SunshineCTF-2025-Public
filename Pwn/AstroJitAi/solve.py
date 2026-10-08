@@ -1,9 +1,10 @@
+import os
 from pwn import *
 import re
 
-# Define the target host and port
-host = "127.0.0.1"
-port = 25004
+# Define the target host and port (overridable by `pwnmake check`).
+host = os.environ.get("HOST", "127.0.0.1")
+port = int(os.environ.get("PORT", 25006))
 
 max_score = 255
 

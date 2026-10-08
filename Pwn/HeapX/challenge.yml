@@ -1,0 +1,28 @@
+version: "0.1"
+name: "HeapX"
+author: "Oreomeister"
+category: "Pwn"
+description: |-
+  We discovered the Falcon 9 rocket's log aggregator, HeapX, can you pwn it and take control before it reaches orbit?
+
+  Files:
+   - `heapx`
+   - `libc.so.6`
+   - `ld-linux-x86-64.so.2`
+
+  * [heapx](/files/sun/25/Pwn/HeapX/heapx)
+  * [libc.so.6](/files/sun/25/Pwn/HeapX/libc.so.6)
+  * [ld-linux-x86-64.so.2](/files/sun/25/Pwn/HeapX/ld-linux-x86-64.so.2)
+attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 450
+connection_info: nc ctf.hackucf.org 25004
+flags:
+  - "sun{pr!ntf_1n7ernAls_4rE_pr3tty_c0ol!}"
+tags:
+  - "sunshinectf-2025"
+  - "expert"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

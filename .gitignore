@@ -39,3 +39,7 @@ __pycache__/
 thumbs.db
 ._*
 *.swp
+
+# per-project build/publish symlinks created by `pwnmake check` (and PH 2.3.2)
+.build
+publish

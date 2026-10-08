@@ -1,0 +1,19 @@
+version: "0.1"
+name: "MoonClicker"
+author: "anthony.js"
+category: "Crypto"
+description: |-
+  Can you beat my game? It might take light years.
+attribution: Written by anthony.js for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 225
+connection_info: https://moonclicker.ctf.hackucf.org
+flags:
+  - "sun{g00d_j0b_u51ng_7h3_crumb5_70_m4k3_7h3_c00k13}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

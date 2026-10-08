@@ -1,0 +1,43 @@
+# ctfcli project config. Don't commit credentials here: set CTFCLI_URL and
+# CTFCLI_ACCESS_TOKEN in the environment instead (they override [config]).
+[config]
+url =
+access_token =
+
+[challenges]
+Crypto/BitsOfSpace =
+Crypto/MoonClicker =
+Crypto/Plutonian =
+Forensics/IntergalacticCopyrightInfringement =
+Forensics/Pretty-Delicious-Food =
+Forensics/RemotelyInteresting =
+Forensics/t0let0le =
+Misc/BigMak =
+Misc/Poop-Challenge =
+Misc/t9 =
+Pwn/AstroJitAi =
+Pwn/CloneArmy =
+Pwn/HAL9000 =
+Pwn/HeapX =
+Pwn/SpaceIsLessThanIdeal =
+Pwn/SpaceIsMyBanner =
+Reversing/BASEic =
+Reversing/ExceLLM =
+Reversing/NumbersGame =
+Reversing/PalatinePack =
+Reversing/PlutoChat =
+Reversing/RomanRomance =
+Reversing/SpaceRace =
+Reversing/Warp =
+Reversing/missioncritical1 =
+Scripting/HailMary =
+Web/Intergalactic_Webhook_Service =
+Web/Lunar_Auth =
+Web/Lunar_File_Invasion =
+Web/Lunar_Shop =
+Web/WebForge =
+i95/Canaveral =
+i95/Daytona =
+i95/Jacksonville =
+i95/Jupiter =
+i95/Miami =

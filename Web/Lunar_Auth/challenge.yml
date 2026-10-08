@@ -1,0 +1,21 @@
+version: "0.1"
+name: "Lunar Auth"
+author: "alimuhammadsecured"
+category: "Web"
+description: |-
+  - Infiltrate the LunarAuth admin panel and gain access to the super secret `FLAG` artifact !
+
+  (Submit flag_1 here)
+attribution: Written by alimuhammadsecured for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 50
+connection_info: https://lunarauth.ctf.hackucf.org
+flags:
+  - "sun{cl1ent_s1d3_auth_1s_N3V3R_a_g00d_1d3A_983765367890393232}"
+tags:
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

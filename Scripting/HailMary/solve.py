@@ -1,74 +1,88 @@
 #!/usr/bin/env python3
+# Genetic-algorithm solver for the NASA "Hail Mary" taumoeba challenge.
+#
+# The server scores a population of 100 gene vectors (10 floats in [0,1]) with
+# sigmoid(dot(weights, gene)) and wants the population *average* above 0.95
+# within 100 generations. We evolve the population toward the (unknown) optimal
+# vertex using the per-sample scores the server returns: keep the best genes
+# (elitism), breed the top performers, and mutate. The dot-product is monotonic
+# so selection pressure quickly drives every gene to the correct 0/1 corner.
+#
+# Ported off numpy to the stdlib `random` module so it runs in the pwnmake
+# check container with only pwntools installed.
+import os
+import sys
 import json
-import numpy as np
+import random
 from pwn import remote
 from datetime import datetime, timezone
 
-HOST = "localhost"
-PORT = 25201
+HOST = os.environ.get("HOST", "localhost")
+PORT = int(os.environ.get("PORT", 25201))
 
 POP_SIZE = 100
 GENE_LEN = 10
-MUT_RATE = 0.1
-MUT_STRENGTH = 0.1
+MUT_RATE = 0.2
+MUT_STRENGTH = 0.25
 
 with open('flag.txt', 'r') as file:
-    expected_flag = file.read()
+    expected_flag = file.read().strip()
+
 
 def random_population():
-    return np.random.rand(POP_SIZE, GENE_LEN).tolist()
+    return [[random.random() for _ in range(GENE_LEN)] for _ in range(POP_SIZE)]
 
-def crossover_and_mutate(parents):
-    new_pop = []
-    for _ in range(POP_SIZE):
-        p1, p2 = parents[np.random.randint(len(parents))], parents[np.random.randint(len(parents))]
+
+def crossover_and_mutate(parents, elite):
+    # Elitism: carry the best individuals through unchanged.
+    new_pop = [list(g) for g in elite]
+    while len(new_pop) < POP_SIZE:
+        p1 = parents[random.randrange(len(parents))]
+        p2 = parents[random.randrange(len(parents))]
         child = [(a + b) / 2 for a, b in zip(p1, p2)]
         # mutation
         for i in range(GENE_LEN):
-            if np.random.rand() < MUT_RATE:
-                child[i] = min(1.0, max(0.0, child[i] + np.random.normal(0, MUT_STRENGTH)))
+            if random.random() < MUT_RATE:
+                child[i] = min(1.0, max(0.0, child[i] + random.gauss(0, MUT_STRENGTH)))
         new_pop.append(child)
     return new_pop
+
 
 def main():
     r = remote(HOST, PORT)
     welcome = r.recvuntil(b"science!\n\n")
-    print(welcome.decode().strip())
+    print(welcome.decode(errors="replace").strip())
 
     population = random_population()
 
-    for gen in range(1, 999):
-        if gen % 100 == 0:
-            population = random_population()
-            
+    while True:
         payload = json.dumps({"samples": population})
         r.sendline(payload.encode())
+
+        line = r.recvline().decode(errors="replace").strip()
         try:
-            resp = r.recvline().decode().strip()
-            resp = json.loads(resp)
-        except:
-            if expected_flag in resp:
-                print(f"✅ Challenge up as of {datetime.now(timezone.utc).isoformat()}. Flag confirmed to be {expected_flag}")
-                print(resp)
-                exit(0)
-            else:
-                print(f"❌ Challenge DOWN as of {datetime.now(timezone.utc).isoformat()}. Response from the server: {resp}")
-                exit(1)
+            resp = json.loads(line)
+        except Exception:
+            # Non-JSON line: either the success message (with the flag) or the
+            # failure message once generations run out.
+            print(line)
+            if expected_flag in line:
+                print(f"Challenge up as of {datetime.now(timezone.utc).isoformat()}. "
+                      f"Flag confirmed to be {expected_flag}")
+                return 0
+            print("Challenge did not yield the flag.")
+            return 1
 
         scores = resp["scores"]
         avg = resp["average"]
-        print(f"Gen {gen}: avg={avg:.4f}")
+        print(f"Gen {resp.get('generation', '?')}: avg={avg:.4f}")
 
-        # pick top 20% as parents
-        scored = list(zip(population, scores))
-        scored.sort(key=lambda x: x[1], reverse=True)
-        parents = [x[0] for x in scored[:POP_SIZE // 5]]
+        # Rank by score; keep top 20% as parents and the top 5 as elites.
+        scored = sorted(zip(population, scores), key=lambda x: x[1], reverse=True)
+        parents = [g for g, _ in scored[:POP_SIZE // 5]]
+        elite = [g for g, _ in scored[:5]]
+        population = crossover_and_mutate(parents, elite)
 
-        population = crossover_and_mutate(parents)
-
-    r.close()
-    print("Gene test failed.")
-    exit(0)
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

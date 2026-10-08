@@ -1,6 +1,6 @@
 # Daytona
 
-Simple ret2shellcode in ARM64 :)
+An ARM64 pwn challenge.
 
 ## Installing stuff
 
@@ -45,3 +45,5 @@ $ gdb-multiarch ./daytona
 
 gdb> target remote :1234
 ```
+
+See [writeup.md](writeup.md) for the solution.

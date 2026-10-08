@@ -1,0 +1,23 @@
+version: "0.1"
+name: "Plutonian"
+author: "tsuto"
+category: "Crypto"
+description: |-
+  One of our deep space listening stations has been receiving a repeating message that appears to be coming from Pluto. It is encrypted with some sort of cipher but our best scientists have at least been able to decrypt the first part of the message, *"Greetings, Earthlings."*
+
+  See if you are able to somehow break their encryption and find out what the message is!
+
+  * [main.py](/files/sun/25/Crypto/Plutonian/main.py)
+attribution: Written by tsuto for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 150
+connection_info: nc ctf.hackucf.org 25403
+flags:
+  - "sun{n3v3r_c0unt_0ut_th3_p1ut0ni4ns}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

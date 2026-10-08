@@ -1,0 +1,21 @@
+version: "0.1"
+name: "Numbers Game"
+author: "ThatOneKMC"
+category: "Reversing"
+description: |-
+  Welcome to the Numbers Game! You'll need some luck for this one.
+
+  * [numbers-game](/files/sun/25/Reversing/NumbersGame/numbers-game)
+attribution: Written by ThatOneKMC for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 100
+connection_info: nc ctf.hackucf.org 25101
+flags:
+  - "sun{I_KNOW_YOU_PLACED_A_MIRROR_BEHIND_ME}"
+tags:
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

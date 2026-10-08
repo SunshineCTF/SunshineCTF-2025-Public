@@ -1,9 +1,11 @@
 #/bin/bash
 
-HOST=localhost
-PORT=25002
-SLEEP_TIME="0.1"
-OUTPUT_FILE="/dev/null"
+# Honor HOST/PORT from the environment (set by `pwnmake check`); fall back
+# to positional args, then sensible defaults, so manual runs still work.
+HOST="${HOST:-localhost}"
+PORT="${PORT:-25002}"
+SLEEP_TIME="${SLEEP_TIME:-0.1}"
+OUTPUT_FILE="${OUTPUT_FILE:-/dev/null}"
 
 if [ $# -eq 0 ]; then
     echo "Usage: $0 [host=localhost] [port=25002] [sleep_time_s=0.1] [output=/dev/null (1 for stdout)]"

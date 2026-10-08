@@ -1,0 +1,15 @@
+name: sun25-i95-daytona
+
+services:
+  daytona:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/arm64
+    ports:
+      - "25606:25606"
+    read_only: true
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 512

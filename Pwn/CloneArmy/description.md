@@ -7,6 +7,6 @@ Files:
  - clone_army-libc.so
  - clone_army-ld.so
 
-`nc sunshinectf.games 25001`
+`nc ctf.hackucf.org 25001`
 
 Author: kcolley

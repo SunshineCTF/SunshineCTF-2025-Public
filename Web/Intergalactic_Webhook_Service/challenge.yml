@@ -1,0 +1,26 @@
+version: "0.1"
+name: "Intergalactic Webhook Service"
+author: "RJCyber"
+category: "Web"
+description: |-
+  I got tired of creating webhooks from online sites, so I made my own webhook service! It even works in outer space! Be sure to check it out and let me know what you think. I'm sure it is the most secure webhook service in the universe.
+
+  * [src/app.py](/files/sun/25/Web/Intergalactic_Webhook_Service/src/app.py)
+  * [src/templates/index.html](/files/sun/25/Web/Intergalactic_Webhook_Service/src/templates/index.html)
+  * [src/Dockerfile](/files/sun/25/Web/Intergalactic_Webhook_Service/src/Dockerfile)
+  * [src/docker-entrypoint.sh](/files/sun/25/Web/Intergalactic_Webhook_Service/src/docker-entrypoint.sh)
+  * [src/pyproject.toml](/files/sun/25/Web/Intergalactic_Webhook_Service/src/pyproject.toml)
+  * [src/uv.lock](/files/sun/25/Web/Intergalactic_Webhook_Service/src/uv.lock)
+attribution: Written by RJCyber for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 200
+connection_info: https://webhook.ctf.hackucf.org
+flags:
+  - "sun{dns_r3b1nd1ng_1s_sup3r_c00l!_ff4bd67cd1}"
+tags:
+  - "sunshinectf-2025"
+  - "intermediate"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

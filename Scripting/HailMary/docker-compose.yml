@@ -1,5 +1,11 @@
+name: sun25-hailmary
+
 services:
   scripting-hail-mary:
     build: ./
     ports:
-    - "0.0.0.0:25201:25201"
+    - "25201:25201"
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 512

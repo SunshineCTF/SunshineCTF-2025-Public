@@ -1,0 +1,30 @@
+version: "0.1"
+name: "Clone Army"
+author: "kcolley"
+category: "Pwn"
+description: |-
+  Hey, you! Want to do a great service for the rebellion? Take this mask, cape,
+  and voice changer and go speak with that empire droid. We have a chance to stop
+  them from producing a clone army, so let's not waste it!
+
+  Files:
+   - clone_army
+   - clone_army-libc.so
+   - clone_army-ld.so
+
+  * [clone_army](/files/sun/25/Pwn/CloneArmy/clone_army)
+  * [clone_army-libc.so](/files/sun/25/Pwn/CloneArmy/clone_army-libc.so)
+  * [clone_army-ld.so](/files/sun/25/Pwn/CloneArmy/clone_army-ld.so)
+attribution: Written by kcolley for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 400
+connection_info: nc ctf.hackucf.org 25001
+flags:
+  - "sun{t4k3_th1s_fl4g_my_l13g3}"
+tags:
+  - "sunshinectf-2025"
+  - "expert"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

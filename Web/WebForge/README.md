@@ -1,7 +1,7 @@
 # Deployment Guide
 <br>
 
-Note: Source code is not provided for this challenge and this NEEDS to be a per instance challenge since it involves RCE.
+Note: Source code is not provided for this challenge and this NEEDS to be a per instance challenge (see the writeup for why).
 ## Building and Running the Challenge
 1. Make sure `Docker` and `Docker Compose` are installed on your system & make sure the container runtime process is running. 
 2. Clone the repository and `cd` into it:
@@ -34,3 +34,5 @@ docker compose down
 docker compose logs -f forge
 ```
 - The flag is stored inside the `forge` container at `/flag.txt`, and is created at build time.
+
+See [writeup.md](writeup.md) for the solution.

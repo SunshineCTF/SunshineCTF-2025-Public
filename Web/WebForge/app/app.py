@@ -61,7 +61,12 @@ def fetch():
 
 @app.route('/admin', methods=['GET'])
 def admin():
-    if request.remote_addr != "127.0.0.1":
+    # Internal-only: require a loopback source AND a request that did not come
+    # through the public edge proxy (which stamps X-From-Edge). Loopback alone
+    # already separates the intended internal SSRF (127.0.0.1) from external
+    # traffic (the container gateway IP); the marker is a deployment-independent
+    # second guard.
+    if request.remote_addr != "127.0.0.1" or request.headers.get("X-From-Edge") is not None:
         abort(403)
         
     if request.method != 'GET':

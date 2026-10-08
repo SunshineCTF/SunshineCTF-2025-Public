@@ -7,3 +7,9 @@
 4. trigger a printf call with %s specifier
 5. Trigger a read log with the "/bin/sh" guard chunk id
 6. cat flag.txt
+
+## Additional notes
+
+Traditional House of Husk exploitation challenge through a large bins attack.
+
+Inspiration: https://4xura.com/pwn/house-of-husk/

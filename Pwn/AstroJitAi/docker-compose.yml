@@ -1,3 +1,5 @@
+name: sun25-astrojitai
+
 services:
   astrojit-ai:
     build: .
@@ -8,4 +10,5 @@ services:
         limits:
           cpus: 0.5
           memory: 500M
-    restart: always
+          pids: 512
+    restart: unless-stopped

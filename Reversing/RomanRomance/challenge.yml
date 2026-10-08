@@ -1,0 +1,23 @@
+version: "0.1"
+name: "Roman Romance"
+author: "Uvuv"
+category: "Reversing"
+description: |-
+  When in Rome...
+
+  > currently has nonstandard flag format `sunshine{...}`
+
+  * [enc.txt](/files/sun/25/Reversing/RomanRomance/enc.txt)
+  * [romanromance](/files/sun/25/Reversing/RomanRomance/romanromance)
+attribution: Written by Uvuv for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 50
+flags:
+  - "sunshine{kN0w_y0u4_r0m@n_hI5t0rY}"
+tags:
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

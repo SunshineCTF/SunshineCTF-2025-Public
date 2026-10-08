@@ -10,7 +10,7 @@ Well you know the expression. Less is more!
 ## Challenge info
 Access with socat if you want to use a tty:
 ```sh
-socat file:`tty`,raw,echo=0 TCP:spacelessthanideal.2025.sunshinectf.games:25003
+socat file:`tty`,raw,echo=0 TCP:ctf.hackucf.org:25003
 ```
 
 Author: solarbonite

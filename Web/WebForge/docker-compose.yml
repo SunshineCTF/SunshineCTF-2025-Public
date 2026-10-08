@@ -1,3 +1,5 @@
+name: sun25-webforge
+
 services:
   forge:
     build: ./app
@@ -5,9 +7,11 @@ services:
       - "127.0.0.1:25303:8000"
     tmpfs:
       - /tmp
-    container_name: forge
-    restart: always
+    restart: unless-stopped
     read_only: true
     environment:
-    - DOMAIN=wormhole.sunshinectf.games
+    - DOMAIN=webforge.ctf.hackucf.org
     - DEBUG=FALSE
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 512

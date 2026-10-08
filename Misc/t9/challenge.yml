@@ -1,0 +1,22 @@
+version: "0.1"
+name: "t9"
+author: "Sachsuke"
+category: "Misc"
+description: |-
+  `7778866{844444777_7446666633_444777_26622244433668}`
+
+  alternatively (if that one is producing invalid results)
+
+  `77778866{8444447777_7446666633_4447777_26622244433668}`
+attribution: Written by Sachsuke for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 50
+flags:
+  - "sun{this_phone_is_ancient}"
+tags:
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

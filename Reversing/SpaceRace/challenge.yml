@@ -1,0 +1,25 @@
+version: "0.1"
+name: "Space Race"
+author: "tsuto"
+category: "Reversing"
+description: |-
+  NASA was so excited to send their new unmanned rover out to pick up some stranded astronauts that they forgot to actually write the software to control it. Can you take a look at the onboard ECU software and see if you can find a way to establish communications?
+
+  If worse comes to worst, maybe they CAN BUS the astronauts back....
+
+  * [client.py](/files/sun/25/Reversing/SpaceRace/client.py)
+  * [Dockerfile](/files/sun/25/Reversing/SpaceRace/Dockerfile)
+  * [server](/files/sun/25/Reversing/SpaceRace/server)
+attribution: Written by tsuto for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 275
+connection_info: nc ctf.hackucf.org 25102
+flags:
+  - "sun{r3d_r0v3r_c0m3_0v3r}"
+tags:
+  - "sunshinectf-2025"
+  - "expert"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

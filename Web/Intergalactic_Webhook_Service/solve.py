@@ -1,9 +1,10 @@
+import os
 import requests
 import time
 from socket import inet_aton
 #IP for our server hosted on :5001 (this doesn't need to be anything special, just any HTTP server on :5001 will do)
-server_ip = "REDACTED" #any public IP should work
-post_url = "http://127.0.0.1:5000"
+server_ip = os.environ.get("REBIND_IP", "REDACTED") #any public IP (running an HTTP server on :5001 that serves the flag) should work
+post_url = os.environ.get("URL", "http://127.0.0.1:25304")
 
 counter = 1
 webhook_id = None

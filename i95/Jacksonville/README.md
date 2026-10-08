@@ -1,5 +1,5 @@
 # Jacksonville
 
-Simple Stack BoF ret2win chall
-
 Deploy using `pwnmake`
+
+See [writeup.md](writeup.md) for the solution.

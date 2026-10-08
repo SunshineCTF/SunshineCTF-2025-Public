@@ -1,7 +1,9 @@
+import os
 import requests
 import re
 
-url = "http://localhost:25402"
+# `pwnmake check` sets URL; default to the archive localhost port for manual runs.
+url = os.environ.get("URL", "http://localhost:25402")
 
 def get_cookie(name: bytes) -> str:
     r = requests.post(url + "/", data={"name": name.decode()})

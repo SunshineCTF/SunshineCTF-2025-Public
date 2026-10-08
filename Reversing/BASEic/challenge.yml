@@ -1,0 +1,23 @@
+version: "0.1"
+name: "BASEic"
+author: "Tyler Waddell (brosu)"
+category: "Reversing"
+description: |-
+  The space base is in danger and we lost the key to get in!
+
+  Files:
+  - `BASEic`
+
+  * [BASEic](/files/sun/25/Reversing/BASEic/BASEic)
+attribution: Written by Tyler Waddell (brosu) for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 50
+flags:
+  - "sun{c0v3r1ng_ur_B4535}"
+tags:
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

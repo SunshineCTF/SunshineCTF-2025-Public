@@ -1,0 +1,21 @@
+version: "0.1"
+name: "Warp"
+author: "Tyler Waddell (brosu)"
+category: "Reversing"
+description: |-
+  The warp tunnel is letting people past our firewall!
+
+  Files:
+  - [`warp`](https://drive.google.com/file/d/1XIFQTjqiXNH_aNCQDNfENcsjqHEilRf7/view?usp=sharing)
+attribution: Written by Tyler Waddell (brosu) for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 350
+flags:
+  - "sun{n0n_gp1_BPF_code_g0_brrrr}"
+tags:
+  - "sunshinectf-2025"
+  - "expert"
+solution:
+  path: writeup.md
+  state: hidden
+state: hidden

@@ -3,3 +3,7 @@
 3. Chain a pop rbp; ret gadget with the leaked stack ptr, then jump to win + 13
 4. Since we skipped the function prologue, the code assumes we have the args stored in the stack
 5. References our fake rbp ptr, and profit
+
+## Additional notes
+
+Stack BoF that requires ROP to properly set args to the win function

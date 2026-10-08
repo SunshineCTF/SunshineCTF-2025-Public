@@ -1,0 +1,21 @@
+version: "0.1"
+name: "Palatine Pack"
+author: "Uvuv"
+category: "Reversing"
+description: |-
+  Caesar is raiding the Roman treasury to pay off his debts to his Gallic allies, and to you and his army. Help him find the password to make this Lucius Caecilius Metellus guy give up the money! >:)    (he is sacrosanct so no violence!)
+
+  * [flag.txt](/files/sun/25/Reversing/PalatinePack/flag.txt)
+  * [palatinepack](/files/sun/25/Reversing/PalatinePack/palatinepack)
+attribution: Written by Uvuv for [SunshineCTF 2025](https://ctftime.org/event/2863)
+type: standard
+value: 100
+flags:
+  - "sunshine{C3A5ER_CR055ED_TH3_RUB1C0N}"
+tags:
+  - "sunshinectf-2025"
+  - "beginner"
+solution:
+  path: writeup.md
+  state: hidden
+state: visible

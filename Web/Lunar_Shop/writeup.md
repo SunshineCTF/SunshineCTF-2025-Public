@@ -50,3 +50,9 @@
 12) dump columns
     - Let's just dump the obvious `flag` column, the `id` column is probably just an integer.
     - `http://alihacker.com:8000/product?product_id=69 UNION SELECT 1, flag, 3, 4 FROM flag-- -`
+
+## Additional notes
+
+- SQLMAP won't work with this, went through all the scan payloads and blocked the one-shot ones.
+- blocked a bunch of query keywords that could be used for DOS-es + blocked suspiciously long queries
+- The goal of this challenge is for people to learn the classic manual `ORDER BY` and `UNION SELECT` SQL injection technique.

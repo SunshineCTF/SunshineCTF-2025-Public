@@ -1,0 +1,14 @@
+name: sun25-spacerace
+
+services:
+  space-race:
+    build: ./src/server
+    ports:
+      - "25102:1337"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 500M
+          pids: 512

@@ -1,5 +1,5 @@
 #  Canaveral
 
-Stack BoF that requires ROP to properly set args to the win function
-
 Deploy using `pwnmake`
+
+See [writeup.md](writeup.md) for the solution.
