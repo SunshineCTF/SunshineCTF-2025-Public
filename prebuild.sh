@@ -5,14 +5,16 @@
 #
 # binutils-aarch64-linux-gnu provides the cross `as`/`ld`/`objcopy` and `cpp`
 # the C preprocessor, both of which pwntools needs to assemble the arm64
-# shellcode in i95/Daytona's solver.
+# shellcode in i95/Daytona's solver. xz-utils lets `pwnmake publish` unpack
+# Reversing/Warp's handout (kept xz-compressed in git) for players.
 set -e
 apt-get update
 apt-get install -y --no-install-recommends \
 	python3-pwntools \
 	python3-requests \
 	binutils-aarch64-linux-gnu \
-	cpp
+	cpp \
+	xz-utils
 
 # docker compose v2 plugin + a `docker-compose` shim, so `pwnmake` can bring the
 # docker-compose challenges up/down from inside the pwnmake container (used by the

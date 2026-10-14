@@ -5,8 +5,7 @@ category: "Reversing"
 description: |-
   The warp tunnel is letting people past our firewall!
 
-  Files:
-  - [`warp`](https://drive.google.com/file/d/1XIFQTjqiXNH_aNCQDNfENcsjqHEilRf7/view?usp=sharing)
+  * [warp](/files/sun/25/Reversing/Warp/warp)
 attribution: Written by Tyler Waddell (brosu) for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard
 value: 350

@@ -5,7 +5,7 @@ category: "Forensics"
 description: |-
   One of our scientists was connected remotely to his Windows workstation via RDP when he suddenly saw a strange window open and then got locked out. The EDR software immediately detected the threat and performed a memory dump, which we've been able to recover. Can you find out what the scientist saw?
 
-  Download: [dmp.7z](https://drive.google.com/file/d/1PE_WcWk9XkTO9mz9nHwc6Qnwf7RET4jx/view?usp=sharing)
+  * [dmp.7z](/files/sun/25/Forensics/RemotelyInteresting/dmp.7z)
 attribution: Written by tsuto for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard
 value: 275
