@@ -5,9 +5,6 @@ category: Pwn
 description: |-
   Dexter is the prime suspect of being the Bay Harbor Butcher, we break into his login terminal and get the proof we need!
 
-  Files:
-   - `miami`
-
   * [miami](/files/sun/25/i95/Miami/miami)
 attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard

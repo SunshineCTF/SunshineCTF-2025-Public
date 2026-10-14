@@ -5,9 +5,6 @@ category: "Pwn"
 description: |-
   A derelict ship's AI is misbehaving. `hal9000.mov` answers prompts from the ship console, but the override protocol is corrupted! Can you successfully take control of the AI?
 
-  Files:
-   - `hal9000.mov`
-
   * [hal9000.mov](/files/sun/25/Pwn/HAL9000/hal9000.mov)
 attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard

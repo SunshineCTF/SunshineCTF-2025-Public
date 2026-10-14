@@ -5,9 +5,6 @@ category: Pwn
 description: |-
   The Jacksonville Jaguars are having a rough season, let's cheer them on!!
 
-  Files:
-    - `jacksonville`
-
   * [jacksonville-2025](/files/sun/25/i95/Jacksonville/jacksonville-2025)
 attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard

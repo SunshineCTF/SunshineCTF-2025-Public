@@ -5,9 +5,6 @@ category: Pwn
 description: |-
   NASA Mission Control needs your help... only YOU can enter the proper launch sequence!!
 
-  Files:
-   - `canaveral`
-
   * [canaveral-2025](/files/sun/25/i95/Canaveral/canaveral-2025)
 attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard

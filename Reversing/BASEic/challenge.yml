@@ -5,9 +5,6 @@ category: "Reversing"
 description: |-
   The space base is in danger and we lost the key to get in!
 
-  Files:
-  - `BASEic`
-
   * [BASEic](/files/sun/25/Reversing/BASEic/BASEic)
 attribution: Written by Tyler Waddell (brosu) for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard

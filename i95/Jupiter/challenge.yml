@@ -5,9 +5,6 @@ category: Pwn
 description: |-
   Jupiter just announced their new Brightline junction... the ECHO TERMINAL!!!
 
-  Files:
-   - `jupiter`
-
   * [jupiter-2025](/files/sun/25/i95/Jupiter/jupiter-2025)
 attribution: Written by Oreomeister for [SunshineCTF 2025](https://ctftime.org/event/2863)
 type: standard
