@@ -6,3 +6,6 @@
 # does not always fail here.
 #
 # $(call ctf_check_web,$(DIR),25304,webhook.ctf.hackucf.org,python3 solve.py)
+
+# The check is disabled above, so publish the nginx snippet directly.
+$(call nginx_service,webhook.ctf.hackucf.org,25304)
